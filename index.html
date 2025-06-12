@@ -1,1431 +1,1449 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="uk" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SolarEnergy - Сонячні електростанції під ключ</title>
-  <meta name="description" content="Заощаджуйте до 90% на електроенергії. Встановлюємо сонячні станції під ключ з гарантією 25 років та окупністю за 3-5 років.">
-  
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-          }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolarTech - Професійний монтаж сонячних панелей</title>
+    <meta name="description" content="Професійний монтаж сонячних панелей для українських домогосподарств. Економте до 80% на електроенергії з найкращими панелями від світових виробників.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'solar-yellow': '#f59e0b',
+                        'solar-orange': '#ea580c',
+                        'solar-blue': '#3b82f6',
+                        'solar-dark': '#1e293b',
+                        'solar-light': '#fefce8',
+                        'solar-accent': '#f97316'
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'bounce-subtle': 'bounceSubtle 2s infinite'
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        bounceSubtle: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-5px)' }
+                        }
+                    }
+                }
+            }
         }
-      }
-    }
-  </script>
-  
-  <style>
-    /* Custom Styles */
-    body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-      color: white;
-      overflow-x: hidden;
-    }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .hero-gradient {
+            background: linear-gradient(135deg, #f59e0b 0%, #ea580c 50%, #d97706 100%);
+        }
+        .theme-toggle {
+            transition: transform 0.3s ease;
+        }
+        .theme-toggle:hover {
+            transform: rotate(180deg);
+        }
+        
+        /* Dark mode improvements */
+        .dark .hero-gradient {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 50%, #dc2626 100%);
+        }
+        
+        /* Smooth transitions */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        /* Animation classes */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-    /* Enhanced Glass Effects */
-    .glass {
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.5) 0%, rgba(30, 41, 59, 0.3) 100%);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 
-                  inset 0 1px 0 rgba(255, 255, 255, 0.15),
-                  0 0 0 1px rgba(255, 255, 255, 0.05);
-    }
+        /* Loading state for images */
+        .img-loading {
+            background-color: #f3f4f6;
+            background-image: linear-gradient(45deg, transparent 35%, rgba(255,255,255,.5) 50%, transparent 65%);
+            background-size: 400% 400%;
+            animation: loading 1.5s ease-in-out infinite;
+        }
 
-    .glass-strong {
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.7) 0%, rgba(30, 41, 59, 0.5) 100%);
-      backdrop-filter: blur(30px);
-      -webkit-backdrop-filter: blur(30px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 
-                  inset 0 1px 0 rgba(255, 255, 255, 0.2),
-                  0 0 0 1px rgba(255, 255, 255, 0.08);
-    }
+        @keyframes loading {
+            0% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-    .glass-subtle {
-      background: rgba(15, 23, 42, 0.2);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
+        /* Accessibility improvements */
+        .focus-visible:focus {
+            outline: 2px solid #f59e0b;
+            outline-offset: 2px;
+        }
 
-    /* Enhanced Particle System */
-    .particles {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      pointer-events: none;
-      opacity: 0.4;
-    }
-
-    .particle {
-      position: absolute;
-      border-radius: 50%;
-      animation: particle linear infinite;
-      filter: blur(0.5px);
-    }
-
-    .particle:nth-child(1) {
-      width: 3px;
-      height: 3px;
-      background: radial-gradient(circle, rgba(240, 180, 41, 0.6) 0%, rgba(240, 180, 41, 0.1) 100%);
-      animation-duration: 25s;
-      left: 10%;
-    }
-
-    .particle:nth-child(2) {
-      width: 2px;
-      height: 2px;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.4) 0%, rgba(56, 189, 248, 0.1) 100%);
-      animation-duration: 35s;
-      animation-delay: -8s;
-      left: 25%;
-    }
-
-    .particle:nth-child(3) {
-      width: 4px;
-      height: 4px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.05) 100%);
-      animation-duration: 40s;
-      animation-delay: -15s;
-      left: 50%;
-    }
-
-    .particle:nth-child(4) {
-      width: 2px;
-      height: 2px;
-      background: radial-gradient(circle, rgba(34, 197, 94, 0.4) 0%, rgba(34, 197, 94, 0.1) 100%);
-      animation-duration: 30s;
-      animation-delay: -20s;
-      left: 75%;
-    }
-
-    .particle:nth-child(5) {
-      width: 3px;
-      height: 3px;
-      background: radial-gradient(circle, rgba(240, 180, 41, 0.5) 0%, rgba(240, 180, 41, 0.1) 100%);
-      animation-duration: 45s;
-      animation-delay: -5s;
-      left: 90%;
-    }
-
-    @keyframes particle {
-      0% { 
-        transform: translateY(100vh) translateX(-20px) scale(0) rotate(0deg); 
-        opacity: 0; 
-      }
-      5% { 
-        transform: translateY(95vh) translateX(0px) scale(1) rotate(90deg); 
-        opacity: 1; 
-      }
-      95% { 
-        transform: translateY(5vh) translateX(20px) scale(1) rotate(270deg); 
-        opacity: 1; 
-      }
-      100% { 
-        transform: translateY(0vh) translateX(0px) scale(0) rotate(360deg); 
-        opacity: 0; 
-      }
-    }
-
-    /* Animations */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.6s ease-out;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .card-hover {
-      transition: all 0.3s ease;
-    }
-
-    .card-hover:hover {
-      transform: translateY(-2px);
-    }
-
-    /* Range Slider */
-    input[type="range"] {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 100%;
-      height: 8px;
-      background: linear-gradient(90deg, #1e293b 0%, #334155 100%);
-      border-radius: 4px;
-      outline: none;
-    }
-
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 24px;
-      height: 24px;
-      background: linear-gradient(135deg, #eab308, #ca8a04);
-      border-radius: 50%;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(240, 180, 41, 0.3);
-    }
-
-    input[type="range"]::-webkit-slider-thumb:hover {
-      transform: scale(1.2);
-      box-shadow: 0 6px 20px rgba(240, 180, 41, 0.5);
-    }
-
-    /* FAQ Styles */
-    .faq-item {
-      border: 1px solid rgba(51, 65, 85, 0.3);
-      border-radius: 16px;
-      overflow: hidden;
-      margin-bottom: 20px;
-      background: rgba(15, 23, 42, 0.4);
-      backdrop-filter: blur(16px);
-      transition: all 0.3s ease;
-    }
-
-    .faq-item:hover {
-      border-color: rgba(240, 180, 41, 0.3);
-      transform: translateY(-2px);
-    }
-
-    .faq-button {
-      width: 100%;
-      padding: 24px;
-      text-align: left;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 18px;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: all 0.3s ease;
-    }
-
-    .faq-button:hover {
-      background: rgba(240, 180, 41, 0.08);
-    }
-
-    .faq-icon {
-      width: 24px;
-      height: 24px;
-      transition: transform 0.4s ease;
-      color: #eab308;
-    }
-
-    .faq-button.active .faq-icon {
-      transform: rotate(45deg);
-    }
-
-    .faq-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.5s ease;
-      background: rgba(2, 6, 23, 0.6);
-    }
-
-    .faq-content.open {
-      max-height: 600px;
-    }
-
-    .faq-content-inner {
-      padding: 24px;
-      color: #94a3b8;
-      line-height: 1.7;
-      font-size: 16px;
-    }
-
-    /* Progress Bar */
-    .progress-bar {
-      position: relative;
-      height: 8px;
-      background: linear-gradient(90deg, #1e293b 0%, #334155 100%);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      background: linear-gradient(90deg, #eab308, #ca8a04, #3b82f6);
-      border-radius: 4px;
-      transition: width 2s ease;
-      width: 0%;
-      box-shadow: 0 0 10px rgba(240, 180, 41, 0.5);
-    }
-
-    /* Enhanced Form Inputs */
-    .form-input {
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.7) 0%, rgba(30, 41, 59, 0.5) 100%);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(100, 116, 139, 0.4);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      color: white;
-      position: relative;
-    }
-
-    .form-input:focus {
-      border-color: #eab308;
-      box-shadow: 0 0 0 3px rgba(240, 180, 41, 0.15),
-                  0 8px 25px rgba(240, 180, 41, 0.1),
-                  inset 0 1px 0 rgba(255, 255, 255, 0.1);
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.7) 100%);
-      outline: none;
-      transform: translateY(-1px);
-    }
-
-    .form-input::placeholder {
-      color: rgba(156, 163, 175, 0.8);
-    }
-
-    /* Gradient Text */
-    .gradient-text {
-      background: linear-gradient(135deg, #eab308 0%, #3b82f6 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    /* Smooth scrolling */
-    html {
-      scroll-behavior: smooth;
-    }
-
-    /* Advanced Visual Effects */
-    .glow-effect {
-      box-shadow: 0 0 20px rgba(240, 180, 41, 0.3),
-                  0 0 40px rgba(240, 180, 41, 0.1),
-                  inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    }
-
-    .text-glow {
-      text-shadow: 0 0 10px rgba(240, 180, 41, 0.5),
-                   0 0 20px rgba(240, 180, 41, 0.3),
-                   0 0 30px rgba(240, 180, 41, 0.1);
-    }
-
-    .floating-animation {
-      animation: floating 6s ease-in-out infinite;
-    }
-
-    @keyframes floating {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      25% { transform: translateY(-10px) rotate(1deg); }
-      50% { transform: translateY(-5px) rotate(-1deg); }
-      75% { transform: translateY(-15px) rotate(0.5deg); }
-    }
-
-    .pulse-glow {
-      animation: pulseGlow 3s ease-in-out infinite;
-    }
-
-    @keyframes pulseGlow {
-      0%, 100% { box-shadow: 0 0 20px rgba(240, 180, 41, 0.3); }
-      50% { box-shadow: 0 0 40px rgba(240, 180, 41, 0.6), 0 0 60px rgba(240, 180, 41, 0.3); }
-    }
-
-    /* Enhanced Mobile Optimizations */
-    @media (max-width: 768px) {
-      .card-hover:hover {
-        transform: translateY(-2px);
-      }
-      
-      .glass {
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-      }
-
-      .glass-strong {
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-      }
-
-      .hero-title {
-        font-size: 3rem;
-        line-height: 1.1;
-      }
-
-      .stats-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero-title {
-        font-size: 2.5rem;
-      }
-      
-      .stats-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-    }
-  </style>
+        /* Performance optimizations */
+        .will-change-transform {
+            will-change: transform;
+        }
+    </style>
 </head>
-
-<body>
-  <!-- Particle Background -->
-  <div class="particles fixed inset-0 z-0" id="particles">
-    <!-- Particles will be generated by JavaScript -->
-  </div>
-
-  <!-- Header -->
-  <header class="fixed w-full z-50 transition-all duration-500" id="navbar">
-    <div class="container mx-auto px-4 py-5 flex justify-between items-center">
-      <a href="#" class="text-2xl font-bold text-yellow-500 flex items-center gap-3 group">
-        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-yellow-500 to-yellow-600 flex items-center justify-center transition-all duration-300 shadow-lg">
-          <i class="fas fa-sun text-slate-900 text-xl"></i>
-        </div>
-        <span class="gradient-text text-3xl font-black">SolarEnergy</span>
-      </a>
-      
-      <!-- Desktop navigation -->
-      <nav class="hidden md:flex space-x-8">
-        <button onclick="scrollToSection('solutions')" class="text-gray-300 hover:text-yellow-500 transition-all duration-300 relative group">
-          Рішення
-          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
-        </button>
-        <button onclick="scrollToSection('calculator')" class="text-gray-300 hover:text-yellow-500 transition-all duration-300 relative group">
-          Калькулятор
-          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
-        </button>
-        <button onclick="scrollToSection('faq')" class="text-gray-300 hover:text-yellow-500 transition-all duration-300 relative group">
-          FAQ
-          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
-        </button>
-        <button onclick="scrollToSection('contact')" class="text-gray-300 hover:text-yellow-500 transition-all duration-300 relative group">
-          Контакти
-          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
-        </button>
-      </nav>
-      
-      <button onclick="scrollToSection('calculator')" class="hidden md:block bg-gradient-to-r from-yellow-500 to-yellow-600 text-slate-900 px-8 py-4 rounded-xl font-bold shadow-lg text-lg border border-yellow-500/30 hover:from-yellow-400 hover:to-yellow-500 transition-all duration-300">
-        <i class="fas fa-calculator mr-2"></i>
-        Безкоштовний розрахунок
-      </button>
-      
-      <!-- Mobile menu button -->
-      <button class="md:hidden text-white p-2 rounded-lg glass" onclick="toggleMobileMenu()">
-        <i class="fas fa-bars text-lg"></i>
-      </button>
-    </div>
-    
-    <!-- Mobile menu -->
-    <div class="md:hidden glass-strong border-b border-slate-700 hidden" id="mobile-menu">
-      <nav class="container mx-auto px-4 py-6 flex flex-col space-y-4">
-        <button onclick="scrollToSection('solutions')" class="text-gray-300 hover:text-yellow-500 transition-colors py-2 text-left">Рішення</button>
-        <button onclick="scrollToSection('calculator')" class="text-gray-300 hover:text-yellow-500 transition-colors py-2 text-left">Калькулятор</button>
-        <button onclick="scrollToSection('faq')" class="text-gray-300 hover:text-yellow-500 transition-colors py-2 text-left">FAQ</button>
-        <button onclick="scrollToSection('contact')" class="text-gray-300 hover:text-yellow-500 transition-colors py-2 text-left">Контакти</button>
-        <button onclick="scrollToSection('calculator')" class="bg-gradient-to-r from-yellow-500 to-yellow-600 text-slate-900 px-6 py-3 rounded-xl font-bold w-full mt-4 hover:from-yellow-400 hover:to-yellow-500 transition-all duration-300 shadow-lg">
-          <i class="fas fa-calculator mr-2"></i>
-          Розрахувати економію
-        </button>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="min-h-screen relative flex items-center overflow-hidden">
-    <!-- Background Image with Enhanced Overlay -->
-    <div class="absolute inset-0 -z-10">
-      <div class="absolute inset-0 bg-gradient-to-br from-slate-950/95 via-slate-900/90 to-slate-800/85 z-10"></div>
-      <img 
-        src="https://images.unsplash.com/photo-1613665813446-82a78c468a1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080" 
-        class="absolute w-full h-full object-cover object-center scale-105" 
-        alt="Сонячні панелі на будинку"
-      />
-    </div>
-
-    <div class="container mx-auto px-4 py-32 text-center md:text-left z-20 relative">
-      <div class="max-w-4xl">
-        <!-- Enhanced Promotional Badge -->
-        <div class="inline-block px-8 py-4 rounded-2xl glass-strong mb-8 border border-yellow-500/30 shadow-lg">
-          <div class="flex items-center gap-3">
-            <div class="w-6 h-6 rounded-full bg-gradient-to-r from-green-400 to-green-500 flex items-center justify-center">
-              <i class="fas fa-check text-white text-xs"></i>
-            </div>
-            <span class="text-sm text-gray-200 font-semibold">Безкоштовна консультація та розрахунок</span>
-          </div>
-        </div>
-        
-        <!-- Main Heading -->
-        <h1 class="hero-title text-5xl md:text-7xl font-black mb-8 leading-tight">
-          <span class="block floating-animation">Енергетична свобода</span>
-          <span class="block gradient-text text-glow">сучасного дому</span>
-        </h1>
-        
-        <!-- Subtitle -->
-        <h2 class="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl leading-relaxed font-light">
-          Заощаджуйте до 90% на електроенергії. Встановлюємо сонячні станції під ключ з гарантією 25 років та окупністю за 3-5 років.
-        </h2>
-        
-        <!-- Statistics -->
-        <div class="flex flex-wrap gap-8 justify-center md:justify-start mb-16 text-center md:text-left">
-          <div>
-            <div class="text-yellow-500 text-4xl font-bold mb-1">2500+</div>
-            <div class="text-gray-400 text-sm">проектів</div>
-          </div>
-          <div>
-            <div class="text-yellow-500 text-4xl font-bold mb-1">40MW+</div>
-            <div class="text-gray-400 text-sm">потужності</div>
-          </div>
-          <div>
-            <div class="text-yellow-500 text-4xl font-bold mb-1">25</div>
-            <div class="text-gray-400 text-sm">років гарантії</div>
-          </div>
-        </div>
-        
-        <!-- Enhanced Action Buttons -->
-        <div class="flex flex-wrap gap-6 justify-center md:justify-start">
-          <button 
-            onclick="scrollToSection('calculator')"
-            class="group bg-gradient-to-r from-yellow-500 to-yellow-600 text-slate-900 px-12 py-6 rounded-2xl font-black shadow-2xl text-xl border border-yellow-500/30 hover:from-yellow-400 hover:to-yellow-500 transition-all duration-300 hover:scale-105 hover:shadow-yellow-500/25"
-          >
-            <div class="flex items-center gap-3">
-              <i class="fas fa-calculator group-hover:rotate-12 transition-transform duration-300"></i>
-              <span>Розрахувати економію зараз</span>
-            </div>
-          </button>
-          <button 
-            onclick="scrollToSection('contact')"
-            class="border-2 border-gray-600 glass-strong text-white px-10 py-6 rounded-2xl hover:border-yellow-500 transition-all duration-300 flex items-center gap-3 group text-lg font-bold hover:scale-105 shadow-lg"
-          >
-            <div class="w-8 h-8 rounded-full bg-gradient-to-r from-yellow-500 to-yellow-600 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <i class="fas fa-phone text-slate-900 text-sm"></i>
-            </div>
-            <span>Безкоштовна консультація</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Benefits Section -->
-  <section class="py-20 relative">
-    <div class="container mx-auto px-4">
-      <div class="max-w-6xl mx-auto">
-        <div class="grid md:grid-cols-3 gap-8">
-          <div class="glass-strong border border-slate-700/50 rounded-2xl p-8 text-center card-hover shadow-lg fade-in">
-            <div class="w-20 h-20 rounded-xl bg-gradient-to-br from-yellow-500 to-yellow-600 flex items-center justify-center mb-6 mx-auto">
-              <i class="fas fa-award text-slate-900 text-2xl"></i>
-            </div>
-            <div class="text-4xl font-bold text-yellow-500 mb-4">15 років</div>
-            <h3 class="text-xl font-semibold mb-2">досвіду</h3>
-            <p class="text-gray-400">Понад 2500 успішних проектів по всій Україні</p>
-          </div>
-          <div class="glass-strong border border-slate-700/50 rounded-2xl p-8 text-center card-hover shadow-lg fade-in">
-            <div class="w-20 h-20 rounded-xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center mb-6 mx-auto">
-              <i class="fas fa-shield-alt text-white text-2xl"></i>
-            </div>
-            <div class="text-4xl font-bold text-green-500 mb-4">25 років</div>
-            <h3 class="text-xl font-semibold mb-2">гарантії</h3>
-            <p class="text-gray-400">Повна гарантія на всі компоненти системи</p>
-          </div>
-          <div class="glass-strong border border-slate-700/50 rounded-2xl p-8 text-center card-hover shadow-lg fade-in">
-            <div class="w-20 h-20 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mb-6 mx-auto">
-              <i class="fas fa-chart-line text-white text-2xl"></i>
-            </div>
-            <div class="text-4xl font-bold text-blue-500 mb-4">до 90%</div>
-            <h3 class="text-xl font-semibold mb-2">економії</h3>
-            <p class="text-gray-400">Зниження витрат на електроенергію</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Solutions Section -->
-  <section id="solutions" class="py-24 relative">
-    <div class="container mx-auto px-4">
-      <div class="text-center mb-20">
-        <h2 class="text-4xl md:text-5xl font-bold mb-6 fade-in">
-          Сонячні рішення <span class="gradient-text">для кожного</span>
-        </h2>
-        <p class="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed fade-in">
-          Індивідуальний підхід до кожного проекту з урахуванням ваших потреб та бюджету
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        <!-- Private House Solution -->
-        <div class="glass-strong border border-slate-700/50 rounded-2xl p-8 hover:border-yellow-500/50 transition-all duration-300 card-hover shadow-lg fade-in">
-          <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-yellow-500 to-yellow-600 flex items-center justify-center mb-6">
-            <i class="fas fa-home text-slate-900 text-xl"></i>
-          </div>
-          <h3 class="text-2xl font-bold mb-4">Приватний будинок</h3>
-          <p class="text-gray-400 mb-6 leading-relaxed">
-            Повна енергетична незалежність для вашого дому з можливістю продажу надлишків
-          </p>
-          <ul class="space-y-3 mb-8">
-            <li class="flex items-center gap-3">
-              <i class="fas fa-check text-yellow-500"></i>
-              <span class="text-gray-300">Потужність 3-30 кВт</span>
-            </li>
-            <li class="flex items-center gap-3">
-              <i class="fas fa-check text-yellow-500"></i>
-              <span class="text-gray-300">Окупність 3-5 років</span>
-            </li>
-            <li class="flex items-center gap-3">
-              <i class="fas fa-check text-yellow-500"></i>
-              <span class="text-gray-300">Зелений тариф</span>
-            </li>
-          </ul>
-          <button onclick="scrollToSection('calculator')" class="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-slate-900 py-3 rounded-xl font-bold hover:from-yellow-400 hover:to-yellow-500 transition-all duration-300">
-            Розрахувати
-          </button>
-        </div>
-
-        <!-- Business Solution -->
-        <div class="glass-strong border border-slate-700/50 rounded-2xl p-8 hover:border-blue-500/50 transition-all duration-300 card-hover shadow-lg fade-in">
-          <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mb-6">
-            <i class="fas fa-building text-white text-xl"></i>
-          </div>
-          <h3 class="text-2xl font-bold mb-4">Бізнес</h3>
-          <p class="text-gray-400 mb-6 leading-relaxed">
-            Зменшення операційних витрат та підвищення енергетичної безпеки
-          </p>
-          <ul class="space-y-3 mb-8">
-            <li class="flex items-center gap-3">
-              <i class="fas fa-check text-blue-500"></i>
-              <span class="text-gray-300">Потужність 30-1000+ кВт</span>
-            </li>
-            <li class="flex items-center gap-3">
-              <i class="fas fa-check text-blue-500"></i>
-              <span class="text-gray-300">Окупність 2-4 роки</span>
-            </li>
-            <li class="flex items-center gap-3">
-              <i class="fas fa-check text-blue-500"></i>
-              <span class="text-gray-300">Податкові пільги</span>
-            </li>
-          </ul>
-          <button onclick="scrollToSection('calculator')" class="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-xl font-bold hover:from-blue-400 hover:to-blue-500 transition-all duration-300">
-            Розрахувати
-          </button>
-        </div>
-
-        <!-- Agricultural Solution -->
-        <div class="glass-strong border border-slate-700/50 rounded-2xl p-8 hover:border-green-500/50 transition-all duration-300 card-hover shadow-lg fade-in">
-          <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center mb-6">
-            <i class="fas fa-seedling text-white text-xl"></i>
-          </div>
-          <h3 class="text-2xl font-bold mb-4">Сільське господарство</h3>
-          <p class="text-gray-400 mb-6 leading-relaxed">
-            Енергетичні рішення для ферм, теплиць та агропромислових комплексів
-          </p>
-          <ul class="space-y-3 mb-8">
-            <li class="flex items-center gap-3">
-              <i class="fas fa-check text-green-500"></i>
-              <span class="text-gray-300">Потужність 10-500 кВт</span>
-            </li>
-            <li class="flex items-center gap-3">
-              <i class="fas fa-check text-green-500"></i>
-              <span class="text-gray-300">Спеціальні умови</span>
-            </li>
-            <li class="flex items-center gap-3">
-              <i class="fas fa-check text-green-500"></i>
-              <span class="text-gray-300">Гібридні системи</span>
-            </li>
-          </ul>
-          <button onclick="scrollToSection('calculator')" class="w-full bg-gradient-to-r from-green-500 to-green-600 text-white py-3 rounded-xl font-bold hover:from-green-400 hover:to-green-500 transition-all duration-300">
-            Розрахувати
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Calculator Section -->
-  <section id="calculator" class="py-24 relative">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold mb-6 fade-in">
-            <span class="gradient-text">Калькулятор</span> сонячної електростанції
-          </h2>
-          <p class="text-xl text-gray-400 leading-relaxed fade-in">
-            Розрахуйте орієнтовну вартість та окупність вашої сонячної станції за 1 хвилину
-          </p>
-        </div>
-
-        <div class="glass-strong border border-slate-700/50 rounded-2xl p-8 md:p-12 fade-in shadow-lg">
-          <div class="grid md:grid-cols-2 gap-12">
-            <!-- Calculator Form -->
-            <div class="space-y-8">
-              <div>
-                <label class="block text-lg font-semibold mb-4">
-                  Середньомісячний рахунок за електроенергію (грн)
-                </label>
-                <div class="relative">
-                  <input 
-                    type="range" 
-                    min="500" 
-                    max="10000" 
-                    value="2000"
-                    id="monthlyBill"
-                    onchange="updateCalculator()"
-                    class="w-full mb-4" 
-                  />
-                  <div class="flex justify-between text-sm text-gray-400">
-                    <span>500 грн</span>
-                    <span>10,000 грн</span>
-                  </div>
-                  <div class="text-center mt-4">
-                    <span class="text-2xl font-bold text-yellow-500" id="billDisplay">
-                      2,000 грн
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <label class="block text-lg font-semibold mb-4">Тип об'єкта</label>
-                <div class="grid grid-cols-2 gap-4">
-                  <button 
-                    id="residential-btn"
-                    onclick="setObjectType('residential')"
-                    class="glass border border-yellow-500 bg-yellow-500/10 py-3 px-4 rounded-xl text-center transition-all duration-300"
-                  >
-                    <i class="fas fa-home text-xl mb-2"></i>
-                    <div class="font-semibold">Будинок</div>
-                  </button>
-                  <button 
-                    id="business-btn"
-                    onclick="setObjectType('business')"
-                    class="glass border border-slate-700 py-3 px-4 rounded-xl text-center transition-all duration-300"
-                  >
-                    <i class="fas fa-building text-xl mb-2"></i>
-                    <div class="font-semibold">Бізнес</div>
-                  </button>
-                </div>
-              </div>
-
-              <div>
-                <label class="block text-lg font-semibold mb-4">Регіон</label>
-                <select 
-                  id="region"
-                  onchange="updateCalculator()"
-                  class="form-input w-full py-3 px-4 rounded-xl text-white"
-                >
-                  <option value="kyiv">Київська область</option>
-                  <option value="dnipro">Дніпропетровська область</option>
-                  <option value="lviv">Львівська область</option>
-                  <option value="odesa">Одеська область</option>
-                  <option value="kharkiv">Харківська область</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- Enhanced Results -->
-            <div class="space-y-6">
-              <div class="glass-strong border border-slate-700/50 rounded-2xl p-8 shadow-lg">
-                <div class="flex items-center gap-3 mb-6">
-                  <div class="w-8 h-8 rounded-lg bg-yellow-500 flex items-center justify-center">
-                    <i class="fas fa-chart-pie text-slate-900 text-sm"></i>
-                  </div>
-                  <h3 class="text-xl font-bold text-yellow-500">Результати розрахунку</h3>
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
+    <!-- Header -->
+    <header class="bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-sun text-solar-orange text-2xl" aria-hidden="true"></i>
+                    <span class="font-bold text-2xl">SolarTech</span>
                 </div>
                 
-                <div class="grid grid-cols-2 gap-6 mb-6">
-                  <div class="text-center p-4 glass rounded-xl border border-slate-700/30">
-                    <div class="text-2xl font-bold text-yellow-500 mb-1" id="power-result">10 кВт</div>
-                    <div class="text-xs text-gray-400">Потужність системи</div>
-                  </div>
-                  <div class="text-center p-4 glass rounded-xl border border-slate-700/30">
-                    <div class="text-2xl font-bold text-green-500 mb-1" id="savings-percentage">85%</div>
-                    <div class="text-xs text-gray-400">Покриття потреб</div>
-                  </div>
-                </div>
-                
-                <div class="space-y-4">
-                  <div class="flex justify-between items-center py-2 border-b border-slate-700/30">
-                    <span class="text-gray-400">Вартість системи:</span>
-                    <span class="font-bold text-xl text-yellow-500" id="cost-result">$8,500</span>
-                  </div>
-                  
-                  <div class="flex justify-between items-center py-2 border-b border-slate-700/30">
-                    <span class="text-gray-400">Економія на рік:</span>
-                    <span class="font-bold text-lg text-green-500" id="savings-result">$1,700</span>
-                  </div>
-                  
-                  <div class="flex justify-between items-center py-2 border-b border-slate-700/30">
-                    <span class="text-gray-400">Виробництво енергії:</span>
-                    <span class="font-bold text-lg text-blue-400" id="energy-production">12,000 кВт·г/рік</span>
-                  </div>
-                  
-                  <div class="flex justify-between items-center py-2 border-b border-slate-700/30">
-                    <span class="text-gray-400">Термін окупності:</span>
-                    <span class="font-bold text-lg" id="payback-result">5.0 років</span>
-                  </div>
-                  
-                  <div class="flex justify-between items-center py-2">
-                    <span class="text-gray-400">Екологія (CO₂):</span>
-                    <span class="font-bold text-lg text-emerald-400" id="co2-savings">3.2 т/рік</span>
-                  </div>
+                <nav class="hidden md:flex space-x-8" aria-label="Головна навігація">
+                    <a href="#products" class="hover:text-solar-orange transition-colors font-medium focus-visible:focus">Продукти</a>
+                    <a href="#packages" class="hover:text-solar-orange transition-colors font-medium focus-visible:focus">Пакети</a>
+                    <a href="#benefits" class="hover:text-solar-orange transition-colors font-medium focus-visible:focus">Переваги</a>
+                    <a href="#faq" class="hover:text-solar-orange transition-colors font-medium focus-visible:focus">Питання</a>
+                    <a href="#contact" class="hover:text-solar-orange transition-colors font-medium focus-visible:focus">Контакти</a>
+                </nav>
+
+                <div class="hidden md:flex items-center space-x-4">
+                    <button id="theme-toggle" class="theme-toggle p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 focus-visible:focus" aria-label="Змінити тему">
+                        <i class="fas fa-sun dark:hidden" aria-hidden="true"></i>
+                        <i class="fas fa-moon hidden dark:block" aria-hidden="true"></i>
+                    </button>
+                    <a href="#contact" class="bg-solar-yellow hover:bg-solar-orange text-solar-dark font-semibold px-6 py-3 rounded-lg transition-colors focus-visible:focus">
+                        <i class="fas fa-phone mr-2" aria-hidden="true"></i>
+                        Отримати консультацію
+                    </a>
                 </div>
 
-                <div class="mt-8">
-                  <div class="flex justify-between text-sm text-gray-400 mb-3">
-                    <span>Ефективність окупності</span>
-                    <span id="progress-percent">60%</span>
-                  </div>
-                  <div class="progress-bar">
-                    <div 
-                      class="progress-fill" 
-                      id="progress-fill"
-                      style="width: 60%"
-                    ></div>
-                  </div>
-                  <div class="text-xs text-gray-500 mt-2">Базується на 3-річному ідеальному періоді окупності</div>
-                </div>
-              </div>
-
-              <button onclick="downloadCalculation()" class="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-slate-900 py-4 rounded-xl font-bold text-lg hover:from-yellow-400 hover:to-yellow-500 transition-all duration-300 shadow-lg">
-                <i class="fas fa-download mr-2"></i>
-                Отримати детальний розрахунок
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ Section -->
-  <section id="faq" class="py-24 relative">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-20">
-          <h2 class="text-4xl md:text-5xl font-bold mb-6 fade-in">
-            Часто задавані <span class="gradient-text">питання</span>
-          </h2>
-          <p class="text-xl text-gray-400 leading-relaxed fade-in">
-            Відповіді на найпопулярніші питання про сонячні електростанції
-          </p>
-        </div>
-
-        <div class="space-y-4" id="faq-container">
-          <!-- FAQ items will be generated by JavaScript -->
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="py-24 relative overflow-hidden">
-    <!-- Decorative background elements -->
-    <div class="absolute w-96 h-96 bg-yellow-500/5 rounded-full blur-3xl -top-20 -left-20 opacity-60"></div>
-    <div class="absolute w-64 h-64 bg-blue-500/5 rounded-full blur-3xl -bottom-20 -right-20 opacity-40"></div>
-    
-    <div class="container mx-auto px-4 relative">
-      <!-- Header -->
-      <div class="text-center mb-16 fade-in">
-        <div class="inline-block px-6 py-3 rounded-full glass border border-yellow-500/20 text-yellow-500 text-sm font-medium mb-6">
-          <i class="fas fa-headset mr-2"></i>
-          Зв'язок з нами
-        </div>
-        <h2 class="text-4xl md:text-5xl font-bold mb-6">
-          Готові почати <span class="gradient-text text-glow">економити?</span>
-        </h2>
-        <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-          Безкоштовна консультація та персональний розрахунок за 24 години
-        </p>
-      </div>
-
-      <div class="max-w-6xl mx-auto">
-        <div class="grid lg:grid-cols-5 gap-8">
-          <!-- Contact Information - 2/5 width -->
-          <div class="lg:col-span-2 space-y-6 fade-in">
-            <!-- Main contact card -->
-            <div class="glass-strong border border-slate-700/50 rounded-2xl p-8 hover:border-yellow-500/30 transition-all duration-500 shadow-lg">
-              <h3 class="text-xl font-bold mb-6 flex items-center gap-3">
-                <div class="w-8 h-8 rounded-lg bg-yellow-500 flex items-center justify-center">
-                  <i class="fas fa-address-book text-slate-900 text-sm"></i>
-                </div>
-                Контактна інформація
-              </h3>
-              
-              <div class="space-y-4">
-                <div class="group">
-                  <a href="tel:+380671234567" class="flex items-center gap-4 p-4 rounded-xl hover:bg-slate-700/30 transition-all duration-300">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-yellow-500 to-yellow-600 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
-                      <i class="fas fa-phone text-slate-900"></i>
-                    </div>
-                    <div>
-                      <div class="font-semibold text-white group-hover:text-yellow-400 transition-colors">+380 (67) 123-45-67</div>
-                      <div class="text-gray-400 text-sm">Цілодобово • Безкоштовно</div>
-                    </div>
-                  </a>
-                </div>
-                
-                <div class="group">
-                  <a href="mailto:info@solarenergy.ua" class="flex items-center gap-4 p-4 rounded-xl hover:bg-slate-700/30 transition-all duration-300">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
-                      <i class="fas fa-envelope text-white"></i>
-                    </div>
-                    <div>
-                      <div class="font-semibold text-white group-hover:text-blue-400 transition-colors">info@solarenergy.ua</div>
-                      <div class="text-gray-400 text-sm">Відповідь протягом години</div>
-                    </div>
-                  </a>
-                </div>
-                
-                <div class="group">
-                  <div class="flex items-start gap-4 p-4 rounded-xl hover:bg-slate-700/30 transition-all duration-300">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
-                      <i class="fas fa-map-marker-alt text-white"></i>
-                    </div>
-                    <div>
-                      <div class="font-semibold text-white">Київ, вул. Сонячна, 15</div>
-                      <div class="text-gray-400 text-sm">Пн-Пт: 9:00-18:00 • Сб: 10:00-16:00</div>
-                      <div class="text-gray-400 text-xs mt-1">Шоурум та головний офіс</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Quick call button -->
-            <div class="text-center">
-              <a 
-                href="tel:+380671234567"
-                class="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-500 to-yellow-600 text-slate-900 px-8 py-4 rounded-xl font-bold hover:from-yellow-400 hover:to-yellow-500 transition-all duration-300 shadow-xl shadow-yellow-500/20 group"
-              >
-                <i class="fas fa-phone-alt group-hover:animate-pulse"></i>
-                Зателефонувати зараз
-              </a>
-            </div>
-
-            <!-- Messengers -->
-            <div class="glass-strong border border-slate-700/50 rounded-2xl p-6 hover:border-yellow-500/30 transition-all duration-500 shadow-lg">
-              <h4 class="text-lg font-bold mb-4 text-center text-white">Месенджери</h4>
-              <div class="grid grid-cols-5 gap-3">
-                <a href="https://t.me/solarenergy_ua" target="_blank" class="group flex flex-col items-center gap-2 p-3 rounded-lg hover:bg-slate-700/50 transition-all duration-300">
-                  <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
-                    <i class="fab fa-telegram-plane text-white"></i>
-                  </div>
-                  <span class="text-xs text-gray-400 group-hover:text-white transition-colors">Telegram</span>
-                </a>
-                
-                <a href="https://wa.me/380671234567" target="_blank" class="group flex flex-col items-center gap-2 p-3 rounded-lg hover:bg-slate-700/50 transition-all duration-300">
-                  <div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
-                    <i class="fab fa-whatsapp text-white"></i>
-                  </div>
-                  <span class="text-xs text-gray-400 group-hover:text-white transition-colors">WhatsApp</span>
-                </a>
-                
-                <a href="viber://chat?number=380671234567" class="group flex flex-col items-center gap-2 p-3 rounded-lg hover:bg-slate-700/50 transition-all duration-300">
-                  <div class="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
-                    <i class="fab fa-viber text-white"></i>
-                  </div>
-                  <span class="text-xs text-gray-400 group-hover:text-white transition-colors">Viber</span>
-                </a>
-                
-                <a href="https://www.facebook.com/solarenergy.ua" target="_blank" class="group flex flex-col items-center gap-2 p-3 rounded-lg hover:bg-slate-700/50 transition-all duration-300">
-                  <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
-                    <i class="fab fa-facebook-f text-white"></i>
-                  </div>
-                  <span class="text-xs text-gray-400 group-hover:text-white transition-colors">Facebook</span>
-                </a>
-                
-                <a href="https://www.instagram.com/solarenergy.ua" target="_blank" class="group flex flex-col items-center gap-2 p-3 rounded-lg hover:bg-slate-700/50 transition-all duration-300">
-                  <div class="w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
-                    <i class="fab fa-instagram text-white"></i>
-                  </div>
-                  <span class="text-xs text-gray-400 group-hover:text-white transition-colors">Instagram</span>
-                </a>
-              </div>
-            </div>
-
-            <!-- Consultant card -->
-            <div class="glass-strong border border-slate-700/50 rounded-2xl p-6 hover:border-yellow-500/30 transition-all duration-500 shadow-lg">
-              <div class="flex items-center gap-4">
-                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-yellow-500 shadow-lg">
-                  <img src="https://i.pravatar.cc/100?img=68" alt="Консультант" class="w-full h-full object-cover">
-                </div>
-                <div class="flex-1">
-                  <h4 class="text-lg font-semibold text-white">Олексій Коваленко</h4>
-                  <p class="text-gray-400 text-sm">Головний консультант</p>
-                  <div class="flex items-center gap-1 mt-1">
-                    <div class="flex text-yellow-500">
-                      <i class="fas fa-star text-xs"></i>
-                      <i class="fas fa-star text-xs"></i>
-                      <i class="fas fa-star text-xs"></i>
-                      <i class="fas fa-star text-xs"></i>
-                      <i class="fas fa-star text-xs"></i>
-                    </div>
-                    <span class="text-gray-400 text-xs ml-1">15+ років досвіду</span>
-                  </div>
-                </div>
-              </div>
-              <div class="mt-4 p-3 bg-slate-700/30 rounded-lg">
-                <p class="text-gray-300 text-sm italic">"Допоможу підібрати оптимальне рішення для вашого об'єкту та розрахувати максимальну економію"</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Contact Form - 3/5 width -->
-          <div class="lg:col-span-3 fade-in">
-            <div class="glass-strong border border-slate-700/50 rounded-2xl p-8 shadow-lg">
-              <div class="flex items-center gap-3 mb-6">
-                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-yellow-500 to-yellow-600 flex items-center justify-center">
-                  <i class="fas fa-paper-plane text-slate-900 text-sm"></i>
-                </div>
-                <h3 class="text-xl font-bold text-white">Залишити заявку</h3>
-              </div>
-              
-              <form id="contact-form" onsubmit="submitForm(event)">
-                <div class="grid md:grid-cols-2 gap-6 mb-6">
-                  <div>
-                    <label class="block text-sm font-medium mb-2 text-gray-300">Ім'я *</label>
-                    <input type="text" required class="form-input w-full py-3 px-4 rounded-xl" placeholder="Ваше ім'я">
-                  </div>
-                  <div>
-                    <label class="block text-sm font-medium mb-2 text-gray-300">Телефон *</label>
-                    <input type="tel" required class="form-input w-full py-3 px-4 rounded-xl" placeholder="+380 (67) 123-45-67">
-                  </div>
-                </div>
-                
-                <div class="grid md:grid-cols-2 gap-6 mb-6">
-                  <div>
-                    <label class="block text-sm font-medium mb-2 text-gray-300">Email</label>
-                    <input type="email" class="form-input w-full py-3 px-4 rounded-xl" placeholder="your@email.com">
-                  </div>
-                  <div>
-                    <label class="block text-sm font-medium mb-2 text-gray-300">Тип об'єкта</label>
-                    <select class="form-input w-full py-3 px-4 rounded-xl text-white">
-                      <option value="house">Приватний будинок</option>
-                      <option value="business">Бізнес</option>
-                      <option value="farm">Сільське господарство</option>
-                      <option value="industrial">Промисловість</option>
-                    </select>
-                  </div>
-                </div>
-                
-                <div class="mb-6">
-                  <label class="block text-sm font-medium mb-2 text-gray-300">Повідомлення</label>
-                  <textarea rows="4" class="form-input w-full py-3 px-4 rounded-xl resize-none" placeholder="Розкажіть про ваш проект: розташування, планована потужність, бюджет..."></textarea>
-                </div>
-                
-                <div class="flex items-center gap-3 mb-6">
-                  <input type="checkbox" id="privacy" required class="w-4 h-4 text-yellow-500 bg-slate-700 border-gray-600 rounded focus:ring-yellow-500">
-                  <label for="privacy" class="text-sm text-gray-300">
-                    Погоджуюсь з <a href="#" class="text-yellow-500 hover:text-yellow-400">обробкою персональних даних</a>
-                  </label>
-                </div>
-                
-                <button type="submit" class="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-slate-900 py-4 rounded-xl font-bold hover:from-yellow-400 hover:to-yellow-500 transition-all duration-300 shadow-lg flex items-center justify-center gap-2">
-                  <i class="fas fa-paper-plane"></i>
-                  Відправити заявку
+                <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 focus-visible:focus" aria-label="Відкрити мобільне меню" aria-expanded="false">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
                 </button>
-                
-                <div class="mt-4 text-center">
-                  <p class="text-gray-400 text-sm">Або зателефонуйте нам зараз: 
-                    <a href="tel:+380671234567" class="text-yellow-500 hover:text-yellow-400 font-semibold">+380 (67) 123-45-67</a>
-                  </p>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700" role="navigation" aria-label="Мобільна навігація">
+            <div class="px-4 py-6 space-y-4">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="font-semibold">Меню</span>
+                    <button id="mobile-theme-toggle" class="theme-toggle p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 focus-visible:focus" aria-label="Змінити тему">
+                        <i class="fas fa-sun dark:hidden" aria-hidden="true"></i>
+                        <i class="fas fa-moon hidden dark:block" aria-hidden="true"></i>
+                    </button>
                 </div>
-              </form>
+                <a href="#products" class="block text-lg hover:text-solar-orange transition-colors font-medium focus-visible:focus">Продукти</a>
+                <a href="#packages" class="block text-lg hover:text-solar-orange transition-colors font-medium focus-visible:focus">Пакети</a>
+                <a href="#benefits" class="block text-lg hover:text-solar-orange transition-colors font-medium focus-visible:focus">Переваги</a>
+                <a href="#faq" class="block text-lg hover:text-solar-orange transition-colors font-medium focus-visible:focus">Питання</a>
+                <a href="#contact" class="block text-lg hover:text-solar-orange transition-colors font-medium focus-visible:focus">Контакти</a>
+                <a href="#contact" class="block bg-solar-yellow hover:bg-solar-orange text-solar-dark font-semibold px-6 py-3 rounded-lg transition-colors text-center mt-4 focus-visible:focus">
+                    <i class="fas fa-phone mr-2" aria-hidden="true"></i>
+                    Отримати консультацію
+                </a>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </header>
 
-  <!-- Footer -->
-  <footer class="py-16 border-t border-slate-700">
-    <div class="container mx-auto px-4">
-      <div class="grid md:grid-cols-4 gap-8 mb-12">
-        <div>
-          <a href="#" class="text-2xl font-bold text-yellow-500 flex items-center gap-3 mb-6">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-500 to-yellow-600 flex items-center justify-center">
-              <i class="fas fa-sun text-slate-900 text-lg"></i>
+    <!-- Hero Section -->
+    <section class="hero-gradient relative overflow-hidden" aria-labelledby="hero-title">
+        <div class="absolute inset-0 bg-black opacity-20" aria-hidden="true"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h1 id="hero-title" class="font-black text-4xl lg:text-6xl text-white mb-6 leading-tight">
+                        Перетворіть сонце на<br />
+                        <span class="text-yellow-200">вашу енергію</span>
+                    </h1>
+                    <p class="text-xl text-white/90 mb-8 leading-relaxed">
+                        Професійний монтаж сонячних панелей для українських домогосподарств. 
+                        Економте до 80% на електроенергії з найкращими панелями від світових виробників.
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#packages" class="bg-yellow-200 hover:bg-white text-solar-dark font-bold px-8 py-4 text-lg rounded-lg transform hover:scale-105 transition-all shadow-lg text-center will-change-transform focus-visible:focus">
+                            <i class="fas fa-calculator mr-2" aria-hidden="true"></i>
+                            Розрахувати вартість
+                        </a>
+                        <a href="#contact" class="border-2 border-white text-white hover:bg-white hover:text-solar-dark font-semibold px-8 py-4 text-lg rounded-lg transition-all text-center focus-visible:focus">
+                            <i class="fas fa-phone mr-2" aria-hidden="true"></i>
+                            Зателефонувати зараз
+                        </a>
+                    </div>
+                    <div class="flex items-center space-x-6 mt-8 text-white/80">
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-shield-alt text-yellow-200" aria-hidden="true"></i>
+                            <span>15 років гарантії</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-award text-yellow-200" aria-hidden="true"></i>
+                            <span>Сертифіковані фахівці</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1559302504-64aae6ca6b6d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
+                         alt="Професійний монтаж сонячних панелей на даху будинку" 
+                         class="rounded-2xl shadow-2xl w-full h-auto transform hover:scale-105 transition-transform duration-300 will-change-transform img-loading"
+                         loading="eager">
+                    <div class="absolute -bottom-6 -left-6 bg-white rounded-xl p-4 shadow-xl">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-white text-xl" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-solar-dark">500+ задоволених клієнтів</p>
+                                <p class="text-sm text-gray-600">По всій Україні</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <span class="gradient-text">SolarEnergy</span>
-          </a>
-          <p class="text-gray-400 leading-relaxed mb-6">
-            Провідна компанія з встановлення сонячних електростанцій в Україні. Більше 2500 успішних проектів.
-          </p>
-          <div class="flex gap-3">
-            <a href="#" class="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center hover:bg-blue-500 transition-colors">
-              <i class="fab fa-facebook-f text-white"></i>
-            </a>
-            <a href="#" class="w-10 h-10 rounded-lg bg-blue-500 flex items-center justify-center hover:bg-blue-400 transition-colors">
-              <i class="fab fa-telegram-plane text-white"></i>
-            </a>
-            <a href="#" class="w-10 h-10 rounded-lg bg-pink-600 flex items-center justify-center hover:bg-pink-500 transition-colors">
-              <i class="fab fa-instagram text-white"></i>
-            </a>
-            <a href="#" class="w-10 h-10 rounded-lg bg-red-600 flex items-center justify-center hover:bg-red-500 transition-colors">
-              <i class="fab fa-youtube text-white"></i>
-            </a>
-          </div>
         </div>
+    </section>
 
-        <div>
-          <h3 class="text-lg font-bold mb-6">Послуги</h3>
-          <ul class="space-y-3">
-            <li><a href="#" class="text-gray-400 hover:text-yellow-500 transition-colors">Приватні будинки</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-yellow-500 transition-colors">Бізнес рішення</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-yellow-500 transition-colors">Промисловість</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-yellow-500 transition-colors">Сільське господарство</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="text-lg font-bold mb-6">Інформація</h3>
-          <ul class="space-y-3">
-            <li><a href="#" class="text-gray-400 hover:text-yellow-500 transition-colors">Про компанію</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-yellow-500 transition-colors">Наші проекти</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-yellow-500 transition-colors">Блог</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-yellow-500 transition-colors">Сертифікати</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="text-lg font-bold mb-6">Контакти</h3>
-          <div class="space-y-3 text-gray-400">
-            <div class="flex items-center gap-2">
-              <i class="fas fa-phone text-yellow-500"></i>
-              <span>+380 (67) 123-45-67</span>
+    <!-- Products Section -->
+    <section id="products" class="py-20 bg-solar-light dark:bg-gray-800" aria-labelledby="products-title">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 id="products-title" class="font-black text-4xl lg:text-5xl mb-6">
+                    Наші <span class="text-solar-orange">продукти</span>
+                </h2>
+                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                    Ми працюємо лише з найкращими світовими виробниками сонячних панелей, 
+                    що гарантує максимальну ефективність та довговічність
+                </p>
             </div>
-            <div class="flex items-center gap-2">
-              <i class="fas fa-envelope text-yellow-500"></i>
-              <span>info@solarenergy.ua</span>
-            </div>
-            <div class="flex items-start gap-2">
-              <i class="fas fa-map-marker-alt text-yellow-500 mt-1"></i>
-              <span>вул. Сонячна, 15<br />Київ, 01001</span>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="border-t border-slate-700 pt-8">
-        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-          <p class="text-gray-400">© 2025 SolarEnergy. Всі права захищені.</p>
-          <div class="flex gap-6">
-            <a href="#" class="text-gray-400 hover:text-yellow-500 transition-colors">Політика конфіденційності</a>
-            <a href="#" class="text-gray-400 hover:text-yellow-500 transition-colors">Умови використання</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Product 1 -->
+                <article class="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow group">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400" 
+                             alt="Двосторонні сонячні панелі Jinko Tiger Neo 72HL4-BDV на даху" 
+                             class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300 will-change-transform img-loading"
+                             loading="lazy">
+                        <span class="absolute top-4 right-4 bg-solar-yellow text-solar-dark px-3 py-1 rounded-full text-sm font-medium">
+                            Двосторонні
+                        </span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-2xl mb-3">Jinko Tiger Neo 72HL4-BDV</h3>
+                        <div class="flex items-center space-x-2 mb-4">
+                            <span class="text-3xl font-black text-solar-orange">590Вт</span>
+                            <span class="text-gray-600 dark:text-gray-300">потужність</span>
+                        </div>
+                        <div class="space-y-2 mb-6">
+                            <h4 class="font-semibold">Переваги:</h4>
+                            <ul class="space-y-1 text-gray-600 dark:text-gray-300">
+                                <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2" aria-hidden="true"></i>Двостороння технологія (+10-20% енергії)</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2" aria-hidden="true"></i>Висока ефективність 22.95%</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2" aria-hidden="true"></i>30-річна гарантія потужності</li>
+                            </ul>
+                        </div>
+                        <div class="border-t pt-6">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-2xl font-bold">від 12,500 грн</span>
+                                <span class="text-sm text-gray-500">за панель</span>
+                            </div>
+                            <button class="w-full bg-solar-orange hover:bg-solar-yellow text-white hover:text-solar-dark font-semibold py-3 rounded-lg transition-colors focus-visible:focus">
+                                Дізнатися більше
+                            </button>
+                        </div>
+                    </div>
+                </article>
 
-  <script>
-    // Global variables
-    let calculatorData = {
-      monthlyBill: 2000,
-      objectType: 'residential',
-      region: 'kyiv'
+                <!-- Product 2 -->
+                <article class="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow group">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400" 
+                             alt="Односторонні сонячні панелі Jinko Solar Tiger Neo 54HL4R-V" 
+                             class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300 will-change-transform img-loading"
+                             loading="lazy">
+                        <span class="absolute top-4 right-4 bg-solar-blue text-white px-3 py-1 rounded-full text-sm font-medium">
+                            Односторонні
+                        </span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-2xl mb-3">Jinko Solar Tiger Neo 54HL4R-V</h3>
+                        <div class="flex items-center space-x-2 mb-4">
+                            <span class="text-3xl font-black text-solar-orange">450Вт</span>
+                            <span class="text-gray-600 dark:text-gray-300">потужність</span>
+                        </div>
+                        <div class="space-y-2 mb-6">
+                            <h4 class="font-semibold">Переваги:</h4>
+                            <ul class="space-y-1 text-gray-600 dark:text-gray-300">
+                                <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2" aria-hidden="true"></i>Оптимальна ціна-якість</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2" aria-hidden="true"></i>Ефективність 21.8%</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2" aria-hidden="true"></i>Надійна конструкція</li>
+                            </ul>
+                        </div>
+                        <div class="border-t pt-6">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-2xl font-bold">від 9,800 грн</span>
+                                <span class="text-sm text-gray-500">за панель</span>
+                            </div>
+                            <button class="w-full bg-solar-orange hover:bg-solar-yellow text-white hover:text-solar-dark font-semibold py-3 rounded-lg transition-colors focus-visible:focus">
+                                Дізнатися більше
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 3 -->
+                <article class="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow group">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400" 
+                             alt="Преміум сонячні панелі Longi Solar LR5-72HTH 575M" 
+                             class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300 will-change-transform img-loading"
+                             loading="lazy">
+                        <span class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                            Преміум
+                        </span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-2xl mb-3">Longi Solar LR5-72HTH 575M</h3>
+                        <div class="flex items-center space-x-2 mb-4">
+                            <span class="text-3xl font-black text-solar-orange">575Вт</span>
+                            <span class="text-gray-600 dark:text-gray-300">потужність</span>
+                        </div>
+                        <div class="space-y-2 mb-6">
+                            <h4 class="font-semibold">Переваги:</h4>
+                            <ul class="space-y-1 text-gray-600 dark:text-gray-300">
+                                <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2" aria-hidden="true"></i>Світовий лідер якості</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2" aria-hidden="true"></i>Ефективність до 22.4%</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2" aria-hidden="true"></i>25-річна продуктивна гарантія</li>
+                            </ul>
+                        </div>
+                        <div class="border-t pt-6">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-2xl font-bold">від 11,200 грн</span>
+                                <span class="text-sm text-gray-500">за панель</span>
+                            </div>
+                            <button class="w-full bg-solar-orange hover:bg-solar-yellow text-white hover:text-solar-dark font-semibold py-3 rounded-lg transition-colors focus-visible:focus">
+                                Дізнатися більше
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 4 -->
+                <article class="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow group">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400" 
+                             alt="N-type сонячні панелі Risen RSM108-9 нового покоління" 
+                             class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300 will-change-transform img-loading"
+                             loading="lazy">
+                        <span class="absolute top-4 right-4 bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                            N-Type
+                        </span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-2xl mb-3">Risen N-type RSM108-9</h3>
+                        <div class="flex items-center space-x-2 mb-4">
+                            <span class="text-3xl font-black text-solar-orange">425Вт</span>
+                            <span class="text-gray-600 dark:text-gray-300">потужність</span>
+                        </div>
+                        <div class="space-y-2 mb-6">
+                            <h4 class="font-semibold">Переваги:</h4>
+                            <ul class="space-y-1 text-gray-600 dark:text-gray-300">
+                                <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2" aria-hidden="true"></i>N-Type технологія нового покоління</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2" aria-hidden="true"></i>Стійкість до деградації</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2" aria-hidden="true"></i>Компактний розмір</li>
+                            </ul>
+                        </div>
+                        <div class="border-t pt-6">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-2xl font-bold">від 8,900 грн</span>
+                                <span class="text-sm text-gray-500">за панель</span>
+                            </div>
+                            <button class="w-full bg-solar-orange hover:bg-solar-yellow text-white hover:text-solar-dark font-semibold py-3 rounded-lg transition-colors focus-visible:focus">
+                                Дізнатися більше
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section id="packages" class="py-20 bg-white dark:bg-gray-900" aria-labelledby="packages-title">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 id="packages-title" class="font-black text-4xl lg:text-5xl mb-6">
+                    Готові <span class="text-solar-orange">пакети</span> для домогосподарств
+                </h2>
+                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                    Підберіть оптимальне рішення для вашого дому. Всі пакети включають панелі, інвертор, монтаж та гарантію
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Basic Package -->
+                <article class="bg-white dark:bg-gray-800 rounded-xl border-2 border-gray-200 dark:border-gray-700 hover:border-solar-yellow transition-all p-8">
+                    <div class="text-center">
+                        <h3 class="font-bold text-2xl mb-2">Базовий</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Для невеликих будинків</p>
+                        <div class="mt-4">
+                            <span class="text-4xl font-black">3 кВт</span>
+                            <p class="text-sm text-gray-500">встановлена потужність</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 my-8">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-sun text-solar-orange" aria-hidden="true"></i>
+                            <span>7 панелей Risen 425Вт</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-microchip text-solar-orange" aria-hidden="true"></i>
+                            <span>Інвертор Huawei 3кВт</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-tools text-solar-orange" aria-hidden="true"></i>
+                            <span>Повний монтаж "під ключ"</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-shield-alt text-solar-orange" aria-hidden="true"></i>
+                            <span>15 років гарантії</span>
+                        </div>
+                    </div>
+
+                    <div class="border-t pt-6">
+                        <div class="text-center mb-6">
+                            <span class="text-3xl font-black">89,000 грн</span>
+                            <p class="text-sm text-gray-500">включно з ПДВ та монтажем</p>
+                        </div>
+                        <button class="w-full bg-gray-800 hover:bg-solar-orange text-white font-semibold py-3 rounded-lg transition-all focus-visible:focus">
+                            Обрати пакет
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Optimal Package -->
+                <article class="bg-gradient-to-br from-solar-yellow to-solar-orange rounded-xl border-2 border-solar-orange transform scale-105 p-8 text-white relative">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                        <span class="bg-solar-dark text-white px-4 py-2 rounded-full text-sm font-medium">
+                            Найпопулярніший
+                        </span>
+                    </div>
+                    
+                    <div class="text-center">
+                        <h3 class="font-bold text-2xl mb-2">Оптимальний</h3>
+                        <p class="text-white/80">Для середніх будинків</p>
+                        <div class="mt-4">
+                            <span class="text-4xl font-black">5 кВт</span>
+                            <p class="text-sm text-white/70">встановлена потужність</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 my-8">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-sun" aria-hidden="true"></i>
+                            <span>11 панелей Jinko 450Вт</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-microchip" aria-hidden="true"></i>
+                            <span>Інвертор Fronius 5кВт</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-tools" aria-hidden="true"></i>
+                            <span>Повний монтаж "під ключ"</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                            <span>20 років гарантії</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-wifi" aria-hidden="true"></i>
+                            <span>Моніторинг онлайн</span>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-white/20 pt-6">
+                        <div class="text-center mb-6">
+                            <span class="text-3xl font-black">135,000 грн</span>
+                            <p class="text-sm text-white/70">включно з ПДВ та монтажем</p>
+                        </div>
+                        <button class="w-full bg-white hover:bg-solar-dark text-solar-orange hover:text-white font-semibold py-3 rounded-lg transition-all focus-visible:focus">
+                            Обрати пакет
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Premium Package -->
+                <article class="bg-white dark:bg-gray-800 rounded-xl border-2 border-gray-200 dark:border-gray-700 hover:border-solar-blue transition-all p-8">
+                    <div class="text-center">
+                        <h3 class="font-bold text-2xl mb-2">Преміум</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Для великих будинків</p>
+                        <div class="mt-4">
+                            <span class="text-4xl font-black">8 кВт</span>
+                            <p class="text-sm text-gray-500">встановлена потужність</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 my-8">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-sun text-solar-blue" aria-hidden="true"></i>
+                            <span>14 панелей Longi 575Вт</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-microchip text-solar-blue" aria-hidden="true"></i>
+                            <span>Інвертор SolarEdge 8кВт</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-tools text-solar-blue" aria-hidden="true"></i>
+                            <span>Повний монтаж "під ключ"</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-shield-alt text-solar-blue" aria-hidden="true"></i>
+                            <span>25 років гарантії</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-wifi text-solar-blue" aria-hidden="true"></i>
+                            <span>Розумний моніторинг</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-battery-full text-solar-blue" aria-hidden="true"></i>
+                            <span>Підготовка під акумулятори</span>
+                        </div>
+                    </div>
+
+                    <div class="border-t pt-6">
+                        <div class="text-center mb-6">
+                            <span class="text-3xl font-bold">215,000 грн</span>
+                            <p class="text-sm text-gray-500">включно з ПДВ та монтажем</p>
+                        </div>
+                        <button class="w-full bg-solar-blue hover:bg-solar-dark text-white font-semibold py-3 rounded-lg transition-all focus-visible:focus">
+                            Обрати пакет
+                        </button>
+                    </div>
+                </article>
+            </div>
+
+            <div class="text-center mt-12">
+                <p class="text-gray-600 dark:text-gray-300 mb-6">Потрібен індивідуальний розрахунок? Наші експерти допоможуть!</p>
+                <a href="#contact" class="bg-solar-yellow hover:bg-solar-orange text-solar-dark font-bold px-8 py-4 text-lg rounded-lg inline-block transition-colors focus-visible:focus">
+                    <i class="fas fa-calculator mr-2" aria-hidden="true"></i>
+                    Розрахувати індивідуально
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="py-20 bg-solar-light dark:bg-gray-800" aria-labelledby="benefits-title">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 id="benefits-title" class="font-black text-4xl lg:text-5xl mb-6">
+                    Чому обирають <span class="text-solar-orange">SolarTech</span>?
+                </h2>
+                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                    Ми робимо перехід на сонячну енергію простим, надійним та вигідним для українських родин
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Benefit 1 -->
+                <article class="bg-white dark:bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow p-8">
+                    <div class="w-16 h-16 bg-solar-yellow rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-piggy-bank text-solar-dark text-2xl" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-4">Економія до 80%</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Зменшіть рахунки за електроенергію до мінімуму. Окупність інвестицій 4-6 років при терміні служби понад 25 років.</p>
+                </article>
+
+                <!-- Benefit 2 -->
+                <article class="bg-white dark:bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow p-8">
+                    <div class="w-16 h-16 bg-solar-orange rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-leaf text-white text-2xl" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-4">Екологічно чисто</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Зменште викиди CO2 на 3-4 тонни щороку. Зробіть внесок у збереження довкілля для майбутніх поколінь.</p>
+                </article>
+
+                <!-- Benefit 3 -->
+                <article class="bg-white dark:bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow p-8">
+                    <div class="w-16 h-16 bg-solar-blue rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-shield-alt text-white text-2xl" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-4">Надійні гарантії</h3>
+                    <p class="text-gray-600 dark:text-gray-300">15-25 років гарантії на обладнання, 5 років на монтажні роботи. Страхування від можливих ризиків.</p>
+                </article>
+
+                <!-- Benefit 4 -->
+                <article class="bg-white dark:bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow p-8">
+                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-tools text-white text-2xl" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-4">Монтаж "під ключ"</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Повний цикл робіт: від проектування до підключення. Сертифіковані монтажники з досвідом понад 5 років.</p>
+                </article>
+
+                <!-- Benefit 5 -->
+                <article class="bg-white dark:bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow p-8">
+                    <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-headphones text-white text-2xl" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-4">Підтримка 24/7</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Цілодобова технічна підтримка, моніторинг системи та оперативне усунення будь-яких проблем.</p>
+                </article>
+
+                <!-- Benefit 6 -->
+                <article class="bg-white dark:bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow p-8">
+                    <div class="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-line text-white text-2xl" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-4">Зростання вартості</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Збільшення ринкової вартості нерухомості на 15-20%. Сонячні панелі - інвестиція в майбутнє.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 bg-white dark:bg-gray-900" aria-labelledby="faq-title">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 id="faq-title" class="font-black text-4xl lg:text-5xl mb-6">
+                    Часті <span class="text-solar-orange">питання</span>
+                </h2>
+                <p class="text-xl text-gray-600 dark:text-gray-300">
+                    Відповіді на найпоширеніші запитання про сонячні панелі
+                </p>
+            </div>
+
+            <div class="space-y-6">
+                <!-- FAQ Item 1 -->
+                <article class="bg-solar-light dark:bg-gray-800 rounded-xl p-6 hover:shadow-lg transition-shadow">
+                    <button class="w-full text-left font-bold text-lg text-gray-900 dark:text-white hover:text-solar-orange transition-colors flex justify-between items-center faq-toggle focus-visible:focus" 
+                            data-target="faq-1" 
+                            aria-expanded="false"
+                            aria-controls="faq-1">
+                        Скільки електроенергії виробляють сонячні панелі в Україні?
+                        <i class="fas fa-chevron-down transform transition-transform faq-icon" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-content hidden mt-4 text-gray-600 dark:text-gray-300" id="faq-1" role="region" aria-labelledby="faq-1">
+                        В Україні сонячні панелі виробляють 1200-1400 кВт⋅год на кВт встановленої потужності на рік. Це означає, що система 5 кВт виробить 6000-7000 кВт⋅год електроенергії щороку, що покриває потреби середнього домогосподарства.
+                    </div>
+                </article>
+
+                <!-- FAQ Item 2 -->
+                <article class="bg-solar-light dark:bg-gray-800 rounded-xl p-6 hover:shadow-lg transition-shadow">
+                    <button class="w-full text-left font-bold text-lg text-gray-900 dark:text-white hover:text-solar-orange transition-colors flex justify-between items-center faq-toggle focus-visible:focus" 
+                            data-target="faq-2"
+                            aria-expanded="false"
+                            aria-controls="faq-2">
+                        Як довго окупається сонячна електростанція?
+                        <i class="fas fa-chevron-down transform transition-transform faq-icon" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-content hidden mt-4 text-gray-600 dark:text-gray-300" id="faq-2" role="region" aria-labelledby="faq-2">
+                        Термін окупності сонячної електростанції в Україні складає 4-6 років в залежності від розміру системи, тарифів на електроенергію та режиму споживання. При цьому гарантований термін роботи панелей - понад 25 років.
+                    </div>
+                </article>
+
+                <!-- FAQ Item 3 -->
+                <article class="bg-solar-light dark:bg-gray-800 rounded-xl p-6 hover:shadow-lg transition-shadow">
+                    <button class="w-full text-left font-bold text-lg text-gray-900 dark:text-white hover:text-solar-orange transition-colors flex justify-between items-center faq-toggle focus-visible:focus" 
+                            data-target="faq-3"
+                            aria-expanded="false"
+                            aria-controls="faq-3">
+                        Чи працюють панелі взимку та в похмуру погоду?
+                        <i class="fas fa-chevron-down transform transition-transform faq-icon" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-content hidden mt-4 text-gray-600 dark:text-gray-300" id="faq-3" role="region" aria-labelledby="faq-3">
+                        Так, сонячні панелі працюють цілий рік. Взимку продуктивність знижується до 20-30% від літньої через коротший день та менший кут сонця. В похмуру погоду виробляється 10-25% від номінальної потужності.
+                    </div>
+                </article>
+
+                <!-- FAQ Item 4 -->
+                <article class="bg-solar-light dark:bg-gray-800 rounded-xl p-6 hover:shadow-lg transition-shadow">
+                    <button class="w-full text-left font-bold text-lg text-gray-900 dark:text-white hover:text-solar-orange transition-colors flex justify-between items-center faq-toggle focus-visible:focus" 
+                            data-target="faq-4"
+                            aria-expanded="false"
+                            aria-controls="faq-4">
+                        Що включає монтаж "під ключ"?
+                        <i class="fas fa-chevron-down transform transition-transform faq-icon" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-content hidden mt-4 text-gray-600 dark:text-gray-300" id="faq-4" role="region" aria-labelledby="faq-4">
+                        Монтаж "під ключ" включає: виїзд інженера, проектування, всі комплектуючі, монтажні роботи, підключення до мережі, оформлення документів для "зеленого" тарифу та введення в експлуатацію.
+                    </div>
+                </article>
+
+                <!-- FAQ Item 5 -->
+                <article class="bg-solar-light dark:bg-gray-800 rounded-xl p-6 hover:shadow-lg transition-shadow">
+                    <button class="w-full text-left font-bold text-lg text-gray-900 dark:text-white hover:text-solar-orange transition-colors flex justify-between items-center faq-toggle focus-visible:focus" 
+                            data-target="faq-5"
+                            aria-expanded="false"
+                            aria-controls="faq-5">
+                        Чи потрібен дозвіл на встановлення сонячних панелей?
+                        <i class="fas fa-chevron-down transform transition-transform faq-icon" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-content hidden mt-4 text-gray-600 dark:text-gray-300" id="faq-5" role="region" aria-labelledby="faq-5">
+                        Для домашніх сонячних електростанцій потужністю до 30 кВт не потрібні спеціальні дозволи. Необхідно лише повідомити енергопостачальну компанію та оформити договір на продаж надлишків електроенергії.
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50 dark:bg-gray-800" aria-labelledby="contact-title">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header -->
+            <div class="text-center mb-16">
+                <h2 id="contact-title" class="font-black text-4xl lg:text-5xl mb-6">
+                    Готові <span class="text-solar-orange">розпочати?</span>
+                </h2>
+                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-12">
+                    Зв'яжіться з нами будь-яким зручним способом для безкоштовної консультації
+                </p>
+            </div>
+
+            <!-- Contact Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                <article class="bg-white dark:bg-gray-900 rounded-xl text-center p-6 hover:shadow-lg transition-all duration-300 border-2 hover:border-solar-yellow hover:scale-105 will-change-transform">
+                    <div class="w-14 h-14 bg-solar-yellow rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-phone text-solar-dark text-xl" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Телефон</h3>
+                    <a href="tel:+380671234567" class="text-lg font-bold text-solar-orange hover:text-solar-accent mb-2 block transition-colors focus-visible:focus">
+                        +38 (067) 123-45-67
+                    </a>
+                    <p class="text-sm text-gray-600 dark:text-gray-300">Дзвоніть з 9:00 до 18:00</p>
+                </article>
+
+                <article class="bg-white dark:bg-gray-900 rounded-xl text-center p-6 hover:shadow-lg transition-all duration-300 border-2 hover:border-green-500 hover:scale-105 will-change-transform">
+                    <div class="w-14 h-14 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fab fa-telegram text-white text-xl" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Telegram</h3>
+                    <a href="https://t.me/solartech_ua" target="_blank" rel="noopener noreferrer" class="text-lg font-bold text-solar-orange hover:text-solar-accent mb-2 block transition-colors focus-visible:focus">
+                        @solartech_ua
+                    </a>
+                    <p class="text-sm text-gray-600 dark:text-gray-300">Швидкий зв'язок 24/7</p>
+                </article>
+
+                <article class="bg-white dark:bg-gray-900 rounded-xl text-center p-6 hover:shadow-lg transition-all duration-300 border-2 hover:border-purple-500 hover:scale-105 will-change-transform">
+                    <div class="w-14 h-14 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fab fa-viber text-white text-xl" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Viber</h3>
+                    <a href="viber://chat?number=%2B380671234567" class="text-lg font-bold text-solar-orange hover:text-solar-accent mb-2 block transition-colors focus-visible:focus">
+                        +38 (067) 123-45-67
+                    </a>
+                    <p class="text-sm text-gray-600 dark:text-gray-300">Миттєві повідомлення</p>
+                </article>
+
+                <article class="bg-white dark:bg-gray-900 rounded-xl text-center p-6 hover:shadow-lg transition-all duration-300 border-2 hover:border-solar-orange hover:scale-105 will-change-transform">
+                    <div class="w-14 h-14 bg-solar-orange rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-envelope text-white text-xl" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Email</h3>
+                    <a href="mailto:info@solartech.ua" class="text-lg font-bold text-solar-orange hover:text-solar-accent mb-2 block transition-colors focus-visible:focus">
+                        info@solartech.ua
+                    </a>
+                    <p class="text-sm text-gray-600 dark:text-gray-300">Відповідь за годину</p>
+                </article>
+            </div>
+
+            <!-- Social Media & Office -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                <article class="bg-white dark:bg-gray-900 rounded-xl p-8 hover:shadow-lg transition-shadow border-2 hover:border-solar-blue">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-16 h-16 bg-solar-blue rounded-full flex items-center justify-center">
+                            <i class="fas fa-map-marker-alt text-white text-2xl" aria-hidden="true"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-xl">Наш офіс</h3>
+                            <p class="text-gray-600 dark:text-gray-300">Завітайте на консультацію</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <p class="text-lg font-semibold">м. Київ, вул. Сонячна, 15</p>
+                        <p class="text-gray-600 dark:text-gray-300">Пн-Пт: 9:00-18:00, Сб: 10:00-16:00</p>
+                        <p class="text-gray-600 dark:text-gray-300">Неділя: вихідний</p>
+                    </div>
+                </article>
+
+                <article class="bg-white dark:bg-gray-900 rounded-xl p-8 hover:shadow-lg transition-shadow border-2 hover:border-pink-500">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center">
+                            <i class="fab fa-instagram text-white text-2xl" aria-hidden="true"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-xl">Соціальні мережі</h3>
+                            <p class="text-gray-600 dark:text-gray-300">Слідкуйте за новинами</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="https://instagram.com/solartech_ua" target="_blank" rel="noopener noreferrer" 
+                           class="flex items-center space-x-2 bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white px-4 py-2 rounded-lg transition-colors focus-visible:focus">
+                            <i class="fab fa-instagram" aria-hidden="true"></i>
+                            <span>Instagram</span>
+                        </a>
+                        <a href="https://facebook.com/solartech.ukraine" target="_blank" rel="noopener noreferrer" 
+                           class="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors focus-visible:focus">
+                            <i class="fab fa-facebook" aria-hidden="true"></i>
+                            <span>Facebook</span>
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Working Cities -->
+            <div class="text-center mb-16">
+                <p class="text-gray-600 dark:text-gray-300 mb-6 text-lg">Працюємо по всій Україні:</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <span class="bg-white dark:bg-gray-700 px-4 py-2 rounded-full text-sm font-medium border">Київ</span>
+                    <span class="bg-white dark:bg-gray-700 px-4 py-2 rounded-full text-sm font-medium border">Харків</span>
+                    <span class="bg-white dark:bg-gray-700 px-4 py-2 rounded-full text-sm font-medium border">Одеса</span>
+                    <span class="bg-white dark:bg-gray-700 px-4 py-2 rounded-full text-sm font-medium border">Дніпро</span>
+                    <span class="bg-white dark:bg-gray-700 px-4 py-2 rounded-full text-sm font-medium border">Львів</span>
+                    <span class="bg-white dark:bg-gray-700 px-4 py-2 rounded-full text-sm font-medium border">Запоріжжя</span>
+                    <span class="bg-white dark:bg-gray-700 px-4 py-2 rounded-full text-sm font-medium border">Полтава</span>
+                    <span class="bg-white dark:bg-gray-700 px-4 py-2 rounded-full text-sm font-medium border">Вінниця</span>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="max-w-2xl mx-auto">
+                <div class="bg-white dark:bg-gray-900 rounded-xl shadow-xl border-2 p-8">
+                    <h3 class="font-bold text-3xl mb-2 text-center">
+                        Отримайте безкоштовну консультацію
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-center mb-8">
+                        Наш експерт зв'яжеться з вами протягом години
+                    </p>
+                    
+                    <form class="space-y-6" id="contact-form" novalidate>
+                        <div>
+                            <label for="name" class="block text-sm font-semibold mb-2">Ім'я *</label>
+                            <input type="text" id="name" name="name" required 
+                                   class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-solar-orange focus:border-transparent dark:bg-gray-800 focus-visible:focus" 
+                                   placeholder="Ваше ім'я"
+                                   aria-describedby="name-error">
+                            <div id="name-error" class="text-red-500 text-sm mt-1 hidden" role="alert"></div>
+                        </div>
+
+                        <div>
+                            <label for="phone" class="block text-sm font-semibold mb-2">Телефон *</label>
+                            <input type="tel" id="phone" name="phone" required 
+                                   class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-solar-orange focus:border-transparent dark:bg-gray-800 focus-visible:focus" 
+                                   placeholder="+38 (067) 123-45-67"
+                                   aria-describedby="phone-error">
+                            <div id="phone-error" class="text-red-500 text-sm mt-1 hidden" role="alert"></div>
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-sm font-semibold mb-2">Email</label>
+                            <input type="email" id="email" name="email" 
+                                   class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-solar-orange focus:border-transparent dark:bg-gray-800 focus-visible:focus" 
+                                   placeholder="your@email.com"
+                                   aria-describedby="email-error">
+                            <div id="email-error" class="text-red-500 text-sm mt-1 hidden" role="alert"></div>
+                        </div>
+
+                        <div>
+                            <label for="city" class="block text-sm font-semibold mb-2">Місто</label>
+                            <select id="city" name="city" 
+                                    class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-solar-orange focus:border-transparent dark:bg-gray-800 focus-visible:focus">
+                                <option value="">Оберіть місто</option>
+                                <option value="kyiv">Київ</option>
+                                <option value="kharkiv">Харків</option>
+                                <option value="odesa">Одеса</option>
+                                <option value="dnipro">Дніпро</option>
+                                <option value="lviv">Львів</option>
+                                <option value="zaporizhzhia">Запоріжжя</option>
+                                <option value="poltava">Полтава</option>
+                                <option value="vinnytsia">Вінниця</option>
+                                <option value="other">Інше</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="message" class="block text-sm font-semibold mb-2">Повідомлення</label>
+                            <textarea id="message" name="message" rows="4" 
+                                      class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-solar-orange focus:border-transparent dark:bg-gray-800 focus-visible:focus" 
+                                      placeholder="Розкажіть про ваші потреби..."></textarea>
+                        </div>
+
+                        <div class="flex items-start space-x-3">
+                            <input type="checkbox" id="privacy" name="privacy" required 
+                                   class="mt-1 h-4 w-4 text-solar-orange focus:ring-solar-orange border-gray-300 rounded">
+                            <label for="privacy" class="text-sm text-gray-600 dark:text-gray-300">
+                                Я погоджуюсь з <a href="#" class="text-solar-orange hover:underline">політикою конфіденційності</a> та обробкою персональних даних
+                            </label>
+                        </div>
+
+                        <button type="submit" 
+                                class="w-full bg-solar-orange hover:bg-solar-yellow text-white hover:text-solar-dark font-bold py-4 rounded-lg transform hover:scale-105 transition-all focus-visible:focus disabled:opacity-50 disabled:cursor-not-allowed"
+                                id="submit-btn">
+                            <span class="submit-text">
+                                <i class="fas fa-paper-plane mr-2" aria-hidden="true"></i>
+                                Отримати консультацію
+                            </span>
+                            <span class="loading-text hidden">
+                                <i class="fas fa-spinner fa-spin mr-2" aria-hidden="true"></i>
+                                Відправка...
+                            </span>
+                        </button>
+
+                        <div id="form-message" class="text-center hidden" role="alert"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-solar-dark text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-sun text-solar-orange text-2xl" aria-hidden="true"></i>
+                        <span class="font-bold text-2xl">SolarTech</span>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        Професійні рішення сонячної енергетики для українських домогосподарств.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://facebook.com/solartech.ukraine" target="_blank" rel="noopener noreferrer" 
+                           class="text-gray-400 hover:text-solar-yellow transition-colors focus-visible:focus" 
+                           aria-label="Facebook">
+                            <i class="fab fa-facebook text-2xl" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://instagram.com/solartech_ua" target="_blank" rel="noopener noreferrer" 
+                           class="text-gray-400 hover:text-solar-yellow transition-colors focus-visible:focus" 
+                           aria-label="Instagram">
+                            <i class="fab fa-instagram text-2xl" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://t.me/solartech_ua" target="_blank" rel="noopener noreferrer" 
+                           class="text-gray-400 hover:text-solar-yellow transition-colors focus-visible:focus" 
+                           aria-label="Telegram">
+                            <i class="fab fa-telegram text-2xl" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Продукти</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#products" class="hover:text-solar-yellow transition-colors focus-visible:focus">Сонячні панелі</a></li>
+                        <li><a href="#products" class="hover:text-solar-yellow transition-colors focus-visible:focus">Інвертори</a></li>
+                        <li><a href="#products" class="hover:text-solar-yellow transition-colors focus-visible:focus">Монтажні системи</a></li>
+                        <li><a href="#products" class="hover:text-solar-yellow transition-colors focus-visible:focus">Акумулятори</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Послуги</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#packages" class="hover:text-solar-yellow transition-colors focus-visible:focus">Проектування</a></li>
+                        <li><a href="#packages" class="hover:text-solar-yellow transition-colors focus-visible:focus">Монтаж</a></li>
+                        <li><a href="#benefits" class="hover:text-solar-yellow transition-colors focus-visible:focus">Обслуговування</a></li>
+                        <li><a href="#benefits" class="hover:text-solar-yellow transition-colors focus-visible:focus">Гарантія</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Контакти</h4>
+                    <div class="space-y-2 text-gray-300">
+                        <p class="flex items-center">
+                            <i class="fas fa-phone text-solar-orange mr-2" aria-hidden="true"></i>
+                            <a href="tel:+380671234567" class="hover:text-solar-yellow transition-colors focus-visible:focus">+38 (067) 123-45-67</a>
+                        </p>
+                        <p class="flex items-center">
+                            <i class="fas fa-envelope text-solar-orange mr-2" aria-hidden="true"></i>
+                            <a href="mailto:info@solartech.ua" class="hover:text-solar-yellow transition-colors focus-visible:focus">info@solartech.ua</a>
+                        </p>
+                        <p class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-solar-orange mr-2" aria-hidden="true"></i>
+                            <span>м. Київ, вул. Сонячна, 15</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 SolarTech Ukraine. Всі права захищені.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" 
+            class="fixed bottom-6 right-6 bg-solar-orange hover:bg-solar-yellow text-white p-3 rounded-full shadow-lg transition-all duration-300 opacity-0 pointer-events-none focus-visible:focus"
+            aria-label="Повернутися наверх">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <script>
+// Theme Toggle with smooth transitions and system preference detection
+function initTheme() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+    const html = document.documentElement;
+    
+    // Check for saved theme, system preference, or default to light
+    const savedTheme = localStorage.getItem('theme');
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const initialTheme = savedTheme || systemTheme;
+    
+    html.classList.toggle('dark', initialTheme === 'dark');
+    
+    function toggleTheme() {
+        // Add transition class for smooth theme change
+        document.body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
+        
+        html.classList.toggle('dark');
+        const newTheme = html.classList.contains('dark') ? 'dark' : 'light';
+        localStorage.setItem('theme', newTheme);
+        
+        // Remove transition after animation completes
+        setTimeout(() => {
+            document.body.style.transition = '';
+        }, 300);
+    }
+    
+    if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+    if (mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleTheme);
+    
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+            html.classList.toggle('dark', e.matches);
+        }
+    });
+}
+
+// Mobile Menu with improved accessibility
+function initMobileMenu() {
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (!mobileMenuToggle || !mobileMenu) return;
+    
+    mobileMenuToggle.addEventListener('click', () => {
+        const isOpen = !mobileMenu.classList.contains('hidden');
+        mobileMenu.classList.toggle('hidden');
+        mobileMenuToggle.setAttribute('aria-expanded', !isOpen);
+        
+        // Update icon
+        const icon = mobileMenuToggle.querySelector('i');
+        if (icon) {
+            if (isOpen) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        }
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!mobileMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+            mobileMenu.classList.add('hidden');
+            mobileMenuToggle.setAttribute('aria-expanded', 'false');
+            const icon = mobileMenuToggle.querySelector('i');
+            if (icon) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        }
+    });
+}
+
+// FAQ Toggle with improved accessibility
+function initFAQ() {
+    const faqToggles = document.querySelectorAll('.faq-toggle');
+    
+    faqToggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+            const targetId = toggle.getAttribute('data-target');
+            const content = document.getElementById(targetId);
+            const icon = toggle.querySelector('.faq-icon');
+            
+            if (!content || !icon) return;
+            
+            const isExpanded = !content.classList.contains('hidden');
+            
+            // Close all other FAQ items
+            faqToggles.forEach(otherToggle => {
+                if (otherToggle !== toggle) {
+                    const otherId = otherToggle.getAttribute('data-target');
+                    const otherContent = document.getElementById(otherId);
+                    const otherIcon = otherToggle.querySelector('.faq-icon');
+                    
+                    if (otherContent && otherIcon) {
+                        otherContent.classList.add('hidden');
+                        otherIcon.classList.remove('rotate-180');
+                        otherToggle.setAttribute('aria-expanded', 'false');
+                    }
+                }
+            });
+            
+            // Toggle current item
+            content.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+            toggle.setAttribute('aria-expanded', !isExpanded);
+        });
+    });
+}
+
+// Smooth Scrolling with offset for fixed header
+function initSmoothScrolling() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                const header = document.querySelector('header');
+                const headerHeight = header ? header.offsetHeight : 0;
+                const targetPosition = targetElement.offsetTop - headerHeight - 20;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                const mobileMenu = document.getElementById('mobile-menu');
+                const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+                if (mobileMenu && mobileMenuToggle) {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                }
+            }
+        });
+    });
+}
+
+// Enhanced Contact Form with validation
+function initContactForm() {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+    
+    const submitBtn = document.getElementById('submit-btn');
+    const formMessage = document.getElementById('form-message');
+    
+    // Phone number formatting
+    const phoneInput = document.getElementById('phone');
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.startsWith('380')) {
+                value = value.substring(3);
+            }
+            if (value.length > 0) {
+                value = '380' + value;
+                const formatted = value.replace(/(\d{3})(\d{2})(\d{3})(\d{2})(\d{2})/, '+$1 ($2) $3-$4-$5');
+                e.target.value = formatted.substring(0, 19);
+            }
+        });
+    }
+
+    // Form validation
+    function validateField(field, errorElement, validator) {
+        if (!field || !errorElement) return true;
+        
+        const value = field.value.trim();
+        const isValid = validator(value);
+        
+        if (isValid) {
+            field.classList.remove('border-red-500');
+            field.classList.add('border-green-500');
+            errorElement.classList.add('hidden');
+            return true;
+        } else {
+            field.classList.remove('border-green-500');
+            field.classList.add('border-red-500');
+            errorElement.classList.remove('hidden');
+            return false;
+        }
+    }
+
+    // Real-time validation
+    const nameField = document.getElementById('name');
+    const nameError = document.getElementById('name-error');
+    if (nameField && nameError) {
+        nameField.addEventListener('blur', () => {
+            validateField(nameField, nameError, (value) => {
+                if (value.length < 2) {
+                    nameError.textContent = 'Ім\'я повинно містити принаймні 2 символи';
+                    return false;
+                }
+                return true;
+            });
+        });
+    }
+
+    const emailField = document.getElementById('email');
+    const emailError = document.getElementById('email-error');
+    if (emailField && emailError) {
+        emailField.addEventListener('blur', () => {
+            if (emailField.value.trim()) {
+                validateField(emailField, emailError, (value) => {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(value)) {
+                        emailError.textContent = 'Введіть правильний email';
+                        return false;
+                    }
+                    return true;
+                });
+            }
+        });
+    }
+
+    const phoneError = document.getElementById('phone-error');
+    if (phoneInput && phoneError) {
+        phoneInput.addEventListener('blur', () => {
+            validateField(phoneInput, phoneError, (value) => {
+                const phoneRegex = /^\+380 \(\d{2}\) \d{3}-\d{2}-\d{2}$/;
+                if (!phoneRegex.test(value)) {
+                    phoneError.textContent = 'Введіть правильний номер телефону';
+                    return false;
+                }
+                return true;
+            });
+        });
+    }
+    
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        if (!nameField || !phoneInput) return;
+        
+        // Validate all fields
+        const nameValid = validateField(nameField, nameError, (value) => value.length >= 2);
+        const phoneValid = validateField(phoneInput, phoneError, (value) => /^\+380 \(\d{2}\) \d{3}-\d{2}-\d{2}$/.test(value));
+        const privacyField = document.getElementById('privacy');
+        const privacyChecked = privacyField ? privacyField.checked : true;
+        
+        if (!privacyChecked) {
+            showFormMessage('Будь ласка, погодьтесь з політикою конфіденційності', 'error');
+            return;
+        }
+
+        if (!nameValid || !phoneValid) {
+            showFormMessage('Будь ласка, виправіть помилки у формі', 'error');
+            return;
+        }
+        
+        // Show loading state
+        setFormLoading(true);
+        
+        try {
+            // Simulate API call
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            // Show success message
+            showFormMessage('Дякуємо! Ваша заявка отримана. Ми зв\'яжемося з вами найближчим часом.', 'success');
+            form.reset();
+            
+            // Reset field styles
+            form.querySelectorAll('input, select, textarea').forEach(field => {
+                field.classList.remove('border-green-500', 'border-red-500');
+            });
+            
+        } catch (error) {
+            showFormMessage('Виникла помилка. Спробуйте ще раз або зателефонуйте нам.', 'error');
+        } finally {
+            setFormLoading(false);
+        }
+    });
+
+    function setFormLoading(loading) {
+        if (!submitBtn) return;
+        
+        const submitText = submitBtn.querySelector('.submit-text');
+        const loadingText = submitBtn.querySelector('.loading-text');
+        
+        if (submitText && loadingText) {
+            if (loading) {
+                submitText.classList.add('hidden');
+                loadingText.classList.remove('hidden');
+                submitBtn.disabled = true;
+            } else {
+                submitText.classList.remove('hidden');
+                loadingText.classList.add('hidden');
+                submitBtn.disabled = false;
+            }
+        }
+    }
+
+    function showFormMessage(message, type) {
+        if (!formMessage) return;
+        
+        formMessage.textContent = message;
+        formMessage.className = `text-center ${type === 'success' ? 'text-green-600' : 'text-red-600'}`;
+        formMessage.classList.remove('hidden');
+        
+        setTimeout(() => {
+            formMessage.classList.add('hidden');
+        }, 5000);
+    }
+}
+
+// Animation on scroll with intersection observer - ВИПРАВЛЕНА ФУНКЦІЯ
+function initScrollAnimations() {
+    // Спочатку показуємо всі елементи, щоб уникнути білого екрану
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    animatedElements.forEach(el => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+    });
+
+    // Тепер налаштовуємо анімації для майбутніх елементів
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
     };
 
-    let mobileMenuOpen = false;
-    let scrolled = false;
-    let openFAQItems = [];
-
-    // FAQ Data
-    const faqData = [
-      {
-        question: "Скільки коштує встановлення сонячної електростанції?",
-        answer: "Вартість залежить від потужності станції та комплектації. Орієнтовні ціни: для приватного будинку (5-10 кВт) - від $4,000 до $8,500, для бізнесу (30-100 кВт) - від $20,000 до $65,000. Точну вартість можна розрахувати за допомогою нашого калькулятора або отримати індивідуальну консультацію."
-      },
-      {
-        question: "За який час окупається сонячна електростанція?",
-        answer: "Термін окупності залежить від потужності станції, енергоспоживання та регіону. В середньому: приватні станції окупаються за 4-6 років, комерційні - за 3-5 років. При зеленому тарифі окупність може скоротитися до 2-4 років."
-      },
-      {
-        question: "Чи працює сонячна електростанція взимку?",
-        answer: "Так, сонячні панелі працюють цілий рік. Взимку продуктивність знижується на 30-50% через коротший світловий день та менш інтенсивне сонячне випромінювання. Проте сучасні панелі ефективно працюють навіть при мінусових температурах та розсіяному світлі."
-      },
-      {
-        question: "Які документи потрібні для встановлення?",
-        answer: "Основні документи: технічні умови на приєднання, проект електропостачання, дозвіл на будівництво (для великих станцій), договір з енергокомпанією. Ми допоможемо з оформленням всіх необхідних документів та супроводимо весь процес."
-      },
-      {
-        question: "Яка гарантія на обладнання?",
-        answer: "Гарантія на сонячні панелі - 25 років на продуктивність (не менше 80%), інвертори - 5-10 років, монтажні роботи - 5 років. Також надаємо сервісне обслуговування та моніторинг роботи станції."
-      },
-      {
-        question: "Чи потрібне технічне обслуговування?",
-        answer: "Сонячні станції потребують мінімального обслуговування. Рекомендується: огляд системи 2 рази на рік, очищення панелей від пилу та снігу, перевірка електричних з'єднань. Ми пропонуємо договори на сервісне обслуговування."
-      }
-    ];
-
-    // Initialize enhanced particles
-    function initParticles() {
-      const particlesContainer = document.getElementById('particles');
-      // Clear existing particles
-      particlesContainer.innerHTML = '';
-      
-      // Create 5 enhanced particles with different properties
-      for (let i = 0; i < 5; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particlesContainer.appendChild(particle);
-      }
-    }
-
-    // Scroll handling
-    function handleScroll() {
-      const newScrolled = window.scrollY > 50;
-      if (newScrolled !== scrolled) {
-        scrolled = newScrolled;
-        const navbar = document.getElementById('navbar');
-        if (scrolled) {
-          navbar.className = navbar.className.replace('glass-subtle', 'glass-strong shadow-2xl');
-        } else {
-          navbar.className = navbar.className.replace('glass-strong shadow-2xl', 'glass-subtle');
-        }
-      }
-
-      // Fade in animation observer
-      const fadeElements = document.querySelectorAll('.fade-in:not(.visible)');
-      fadeElements.forEach(element => {
-        const elementTop = element.getBoundingClientRect().top;
-        const elementVisible = 150;
-        
-        if (elementTop < window.innerHeight - elementVisible) {
-          element.classList.add('visible');
-        }
-      });
-    }
-
-    // Smooth scroll to section
-    function scrollToSection(sectionId) {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        const offsetTop = element.offsetTop - 100;
-        window.scrollTo({
-          top: offsetTop,
-          behavior: 'smooth'
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // Stop observing once visible
+            }
         });
-      }
-      closeMobileMenu();
-    }
+    }, observerOptions);
 
-    // Mobile menu
-    function toggleMobileMenu() {
-      mobileMenuOpen = !mobileMenuOpen;
-      const mobileMenu = document.getElementById('mobile-menu');
-      if (mobileMenuOpen) {
-        mobileMenu.classList.remove('hidden');
-      } else {
-        mobileMenu.classList.add('hidden');
-      }
-    }
-
-    function closeMobileMenu() {
-      mobileMenuOpen = false;
-      document.getElementById('mobile-menu').classList.add('hidden');
-    }
-
-    // Enhanced Calculator with Real Solar Formulas
-    function updateCalculator() {
-      const monthlyBill = parseInt(document.getElementById('monthlyBill').value);
-      calculatorData.monthlyBill = monthlyBill;
-      
-      document.getElementById('billDisplay').textContent = monthlyBill.toLocaleString() + ' грн';
-      
-      // Real solar energy calculations
-      const electricityTariff = 4.32; // UAH per kWh (average Ukrainian tariff 2024)
-      const monthlyConsumption = monthlyBill / electricityTariff; // kWh per month
-      const annualConsumption = monthlyConsumption * 12; // kWh per year
-      
-      // Regional solar irradiation coefficients (kWh/m²/year)
-      const solarIrradiation = {
-        'kyiv': 1100,
-        'dnipro': 1200,
-        'lviv': 1000,
-        'odesa': 1300,
-        'kharkiv': 1150
-      };
-      
-      const regionIrradiation = solarIrradiation[calculatorData.region] || 1100;
-      
-      // Panel efficiency and system losses
-      const panelEfficiency = 0.21; // 21% efficiency for modern panels
-      const systemEfficiency = 0.85; // 85% system efficiency (inverter losses, cables, etc.)
-      const performanceRatio = 0.75; // Real-world performance ratio
-      
-      // Calculate required panel area and power
-      const energyPerM2 = regionIrradiation * panelEfficiency * systemEfficiency * performanceRatio;
-      const requiredArea = annualConsumption / energyPerM2;
-      const panelPowerPerM2 = 210; // Watts per m² for modern panels
-      const recommendedPower = Math.ceil((requiredArea * panelPowerPerM2) / 1000); // Convert to kW
-      
-      // Cost calculations (updated 2024 prices)
-      let costPerKW;
-      if (calculatorData.objectType === 'residential') {
-        if (recommendedPower <= 10) costPerKW = 950; // Small residential systems
-        else if (recommendedPower <= 30) costPerKW = 850;
-        else costPerKW = 800;
-      } else {
-        if (recommendedPower <= 50) costPerKW = 750; // Commercial systems
-        else if (recommendedPower <= 100) costPerKW = 650;
-        else costPerKW = 600; // Large commercial
-      }
-      
-      const estimatedCost = recommendedPower * costPerKW;
-      
-      // Energy production and savings calculation
-      const annualProduction = recommendedPower * regionIrradiation * performanceRatio;
-      const savingsPercentage = Math.min(annualProduction / annualConsumption, 0.95); // Max 95% savings
-      const actualSavings = annualConsumption * savingsPercentage;
-      const yearlySavingsUAH = actualSavings * electricityTariff;
-      const yearlySavingsUSD = yearlySavingsUAH / 37; // UAH to USD conversion
-      
-      // Green tariff potential (if excess energy)
-      const greenTariff = 6.5; // UAH per kWh for green tariff
-      const excessEnergy = Math.max(0, annualProduction - annualConsumption);
-      const greenTariffIncome = excessEnergy * greenTariff / 37; // Convert to USD
-      
-      const totalYearlySavings = yearlySavingsUSD + greenTariffIncome;
-      
-      // Payback period calculation
-      const paybackPeriod = Math.ceil(estimatedCost / totalYearlySavings * 10) / 10;
-      const progressPercent = Math.min((3 / paybackPeriod) * 100, 100); // 3 years as ideal
-      
-      // CO2 savings
-      const co2Factor = 0.54; // kg CO2 per kWh in Ukraine
-      const annualCO2Savings = actualSavings * co2Factor / 1000; // tons per year
-      
-      // Update results
-      document.getElementById('power-result').textContent = recommendedPower + ' кВт';
-      document.getElementById('cost-result').textContent = '$' + estimatedCost.toLocaleString();
-      document.getElementById('savings-result').textContent = '$' + Math.round(totalYearlySavings).toLocaleString();
-      document.getElementById('payback-result').textContent = paybackPeriod + ' років';
-      document.getElementById('progress-percent').textContent = Math.round(progressPercent) + '%';
-      document.getElementById('progress-fill').style.width = Math.round(progressPercent) + '%';
-      
-      // Update additional metrics if elements exist
-      if (document.getElementById('co2-savings')) {
-        document.getElementById('co2-savings').textContent = annualCO2Savings.toFixed(1) + ' т/рік';
-      }
-      if (document.getElementById('energy-production')) {
-        document.getElementById('energy-production').textContent = Math.round(annualProduction).toLocaleString() + ' кВт·г/рік';
-      }
-      if (document.getElementById('savings-percentage')) {
-        document.getElementById('savings-percentage').textContent = Math.round(savingsPercentage * 100) + '%';
-      }
-    }
-
-    function setObjectType(type) {
-      calculatorData.objectType = type;
-      
-      // Update button styles
-      const residentialBtn = document.getElementById('residential-btn');
-      const businessBtn = document.getElementById('business-btn');
-      
-      if (type === 'residential') {
-        residentialBtn.className = 'glass border border-yellow-500 bg-yellow-500/10 py-3 px-4 rounded-xl text-center transition-all duration-300';
-        businessBtn.className = 'glass border border-slate-700 py-3 px-4 rounded-xl text-center transition-all duration-300';
-      } else {
-        businessBtn.className = 'glass border border-yellow-500 bg-yellow-500/10 py-3 px-4 rounded-xl text-center transition-all duration-300';
-        residentialBtn.className = 'glass border border-slate-700 py-3 px-4 rounded-xl text-center transition-all duration-300';
-      }
-      
-      updateCalculator();
-    }
-
-    function downloadCalculation() {
-      alert('Функція завантаження розрахунку буде доступна після інтеграції з backend системою. Зв\'яжіться з нами для отримання детального розрахунку.');
-    }
-
-    // FAQ functions
-    function initFAQ() {
-      const container = document.getElementById('faq-container');
-      
-      faqData.forEach((item, index) => {
-        const faqElement = document.createElement('div');
-        faqElement.className = 'faq-item fade-in';
-        faqElement.innerHTML = `
-          <button class="faq-button" onclick="toggleFAQ(${index})">
-            ${item.question}
-            <i class="fas fa-plus faq-icon" id="faq-icon-${index}"></i>
-          </button>
-          <div class="faq-content" id="faq-content-${index}">
-            <div class="faq-content-inner">
-              ${item.answer}
-            </div>
-          </div>
-        `;
-        container.appendChild(faqElement);
-      });
-    }
-
-    function toggleFAQ(index) {
-      const content = document.getElementById(`faq-content-${index}`);
-      const icon = document.getElementById(`faq-icon-${index}`);
-      const button = icon.parentElement;
-      
-      if (openFAQItems.includes(index)) {
-        // Close
-        openFAQItems = openFAQItems.filter(i => i !== index);
-        content.classList.remove('open');
-        button.classList.remove('active');
-      } else {
-        // Open
-        openFAQItems.push(index);
-        content.classList.add('open');
-        button.classList.add('active');
-      }
-    }
-
-    // Contact form
-    function submitForm(event) {
-      event.preventDefault();
-      alert('Дякуємо за вашу заявку! Ми зв\'яжемося з вами найближчим часом.');
-      event.target.reset();
-    }
-
-    // Initialize everything
-    document.addEventListener('DOMContentLoaded', function() {
-      initParticles();
-      initFAQ();
-      updateCalculator();
-      
-      // Set initial header state
-      const navbar = document.getElementById('navbar');
-      navbar.className += ' glass-subtle';
-      
-      // Event listeners
-      window.addEventListener('scroll', handleScroll);
-      
-      // Initial fade-in check
-      setTimeout(() => {
-        handleScroll();
-      }, 100);
+    // Observe elements that are not yet visible
+    animatedElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top > window.innerHeight) {
+            // Reset styles for elements below the fold
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            observer.observe(el);
+        }
     });
-  </script>
+}
+
+// Back to top button
+function initBackToTop() {
+    const backToTopBtn = document.getElementById('back-to-top');
+    if (!backToTopBtn) return;
+    
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+            backToTopBtn.classList.add('opacity-100');
+        } else {
+            backToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+            backToTopBtn.classList.remove('opacity-100');
+        }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+// Image loading optimization
+function initImageLoading() {
+    const images = document.querySelectorAll('img');
+    
+    images.forEach(img => {
+        img.addEventListener('load', () => {
+            img.classList.remove('img-loading');
+        });
+        
+        img.addEventListener('error', () => {
+            img.classList.remove('img-loading');
+            img.alt = 'Зображення недоступне';
+        });
+    });
+}
+
+// Performance optimizations
+function initPerformanceOptimizations() {
+    // Debounce scroll events
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        if (scrollTimeout) {
+            clearTimeout(scrollTimeout);
+        }
+        scrollTimeout = setTimeout(() => {
+            // Handle scroll events here
+        }, 10);
+    }, { passive: true });
+}
+
+// Initialize all functions when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    try {
+        initTheme();
+        initMobileMenu();
+        initFAQ();
+        initSmoothScrolling();
+        initContactForm();
+        initScrollAnimations(); // Це була основна проблема
+        initBackToTop();
+        initImageLoading();
+        initPerformanceOptimizations();
+        
+        // НЕ додаємо animate-on-scroll клас до всіх секцій одразу
+        // Замість цього показуємо контент одразу
+        document.body.style.opacity = '1';
+        
+        // Remove loading states after initial load
+        setTimeout(() => {
+            document.body.classList.add('loaded');
+        }, 100);
+        
+    } catch (error) {
+        console.error('Помилка ініціалізації:', error);
+        // Якщо є помилка, показуємо контент в будь-якому випадку
+        document.body.style.opacity = '1';
+        const animatedElements = document.querySelectorAll('.animate-on-scroll');
+        animatedElements.forEach(el => {
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+        });
+    }
+});
+
+// Handle browser back/forward navigation
+window.addEventListener('popstate', () => {
+    const hash = window.location.hash;
+    if (hash) {
+        const target = document.querySelector(hash);
+        if (target) {
+            const header = document.querySelector('header');
+            const headerHeight = header ? header.offsetHeight : 0;
+            window.scrollTo({
+                top: target.offsetTop - headerHeight - 20,
+                behavior: 'smooth'
+            });
+        }
+    }
+});
+    </script>
 </body>
 </html>
